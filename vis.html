@@ -134,7 +134,8 @@
 			arcs.append('path')
 			    .attr('d', arc)
 			    .attr('stroke', 'white')
-			    .attr('stroke-width', '.5')
+			    .attr('stroke-width', '2')
+			    .attr('stroke-linecap', 'square')
 			    .attr('fill', function (d, i) {
 			    	return color(d.data.reading);
 				});
