@@ -161,10 +161,10 @@
 		var filteredData = [];
 
 		function getDataForDay(season, date, location, f){
-			$.getJSON('data/newDataDemo.json', function(data) {         
-    			//console.log(data);		
+			$.getJSON('data/data.json', function(data) {         
+    			console.log(data);		
     			var dataForSeason = data[location][season];
-    			//console.log(dataForSeason);
+    			console.log(dataForSeason);
     			var dataForDate;
     			for(i=0; i<dataForSeason.length; i++){
     				if(dataForSeason[i].Date===date){
@@ -177,7 +177,7 @@
 		}
 
 
-		getDataForDay("Spring","15/04/2010", "BRI", loadGraph);
+		getDataForDay("Summer","15/07/2010", "BRI", loadGraph);
 
 </script>
 		
