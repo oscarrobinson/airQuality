@@ -1,10 +1,6 @@
 {
-	"Location": 
-	{
 		"BRI":
 		{
-			"Season":
-			{
 				"Spring":
 				[
 					{
@@ -12,36 +8,34 @@
 						"Date":"15/04/2010",
 						"Data":
 							[	
-								{	"hour": 0, "value":177.60001	},
-								{	"hour": 1, "value":110.1		},
-								{	"hour": 2, "value":134			},
-								{	"hour": 3, "value":162.39999	},
-								{	"hour": 4, "value":326.39999	},
-								{	"hour": 5, "value":745.09998	},
-								{	"hour": 6, "value":608.40002	},
-								{	"hour": 7, "value":630.90002	},
-								{	"hour": 8, "value":730			},
-								{	"hour": 9, "value":648.90002	},
-								{	"hour": 10, "value":716.70001	},
-								{	"hour": 11, "value":667.20001	},
-								{	"hour": 12, "value":586.59998	},
-								{	"hour": 13, "value":516.29999	},
-								{	"hour": 14, "value":648.70001	},
-								{	"hour": 15, "value":604.5		},
-								{	"hour": 16, "value":514.5		},
-								{	"hour": 17, "value":628.70001	},
-								{	"hour": 18, "value":417.60001	},
-								{	"hour": 19, "value":573.5		},
-								{	"hour": 20, "value":439.60001	},
-								{	"hour": 21, "value":338.89999	},
-								{	"hour": 22, "value":376.39999	},
-								{	"hour": 23, "value":204.10001	}
+								{	"hour": 0, "reading":177.60001	},
+								{	"hour": 1, "reading":110.1		},
+								{	"hour": 2, "reading":134			},
+								{	"hour": 3, "reading":162.39999	},
+								{	"hour": 4, "reading":326.39999	},
+								{	"hour": 5, "reading":745.09998	},
+								{	"hour": 6, "reading":608.40002	},
+								{	"hour": 7, "reading":630.90002	},
+								{	"hour": 8, "reading":730			},
+								{	"hour": 9, "reading":648.90002	},
+								{	"hour": 10, "reading":716.70001	},
+								{	"hour": 11, "reading":667.20001	},
+								{	"hour": 12, "reading":586.59998	},
+								{	"hour": 13, "reading":516.29999	},
+								{	"hour": 14, "reading":648.70001	},
+								{	"hour": 15, "reading":604.5		},
+								{	"hour": 16, "reading":514.5		},
+								{	"hour": 17, "reading":628.70001	},
+								{	"hour": 18, "reading":417.60001	},
+								{	"hour": 19, "reading":573.5		},
+								{	"hour": 20, "reading":439.60001	},
+								{	"hour": 21, "reading":338.89999	},
+								{	"hour": 22, "reading":376.39999	},
+								{	"hour": 23, "reading":204.10001	}
 							]
 
 					}
 				]
-			}
 		}
 
-	}
 }
