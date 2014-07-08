@@ -140,6 +140,8 @@
 			   	return 1;
 			});
 
+		var group = canvas.append('g')
+			.attr('class', 'graph_box');
 
 
 		var graphData = []
@@ -148,8 +150,10 @@
 		var loadGraph = function(){
 
 			
-			var group = canvas.append('g')
+			group = canvas.select('.graph_box')
 				.attr('transform', 'translate(300, 300)');
+
+			console.log(group);
 
 			var g_path = group.selectAll('path')
 			    .data(pie(graphData));
@@ -167,10 +171,34 @@
 			    	return color(d.data.reading);
 				});
 
+			g_path
+			    .attr('d', arc)
+			    .attr('stroke', 'white')
+			    .attr('stroke-width', '1')
+			    .attr('stroke-linecap', 'square')
+			    .attr('fill', function (d, i) {
+			    	return color(d.data.reading);
+				});
+
+
 			g_path.exit().remove();
 
 
 			g_text.enter().append('text')
+			    .attr('text-anchor', 'middle')
+			    .attr('font-size', '12px')
+			    .attr('font-weight', 'bold')
+			    .attr('font-family', 'sans-serif')
+			    .attr('fill', '#333333')
+			    .text(function (d, i) {
+			    	return Math.round(d.data.reading);
+				})
+				.attr('transform', function (d) {
+			    	var c = arc.centroid(d);
+			    	return "translate(" + c[0]*2.0 +"," + c[1]*2.0 + ")";
+				});
+
+			g_text
 			    .attr('text-anchor', 'middle')
 			    .attr('font-size', '12px')
 			    .attr('font-weight', 'bold')
@@ -265,7 +293,7 @@
 
 
 
-		getDataForSeasonAndDay("Summer", "Sat", "BRI", loadGraph);
+		getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(), "BRI", loadGraph);
 
 
 
