@@ -16,10 +16,10 @@
 		var loadGraph = function(filteredData){
 
 			// canvas dimensions
-			var width = 500;
-			var height = 500;
-			var verPadding = 50;
-			var horPadding = 50;
+			var width = 480;
+			var height = 480;
+			var verPadding = 30;
+			var horPadding = 30;
 			var maxRadius = (width / 2) - 10;
 			// dynamic center
 			var cx = (width / 2) + verPadding;
@@ -35,9 +35,10 @@
 
 			for(i=0; i<filteredData.length; i++){
 				console.log("Hour: "+filteredData[i].hour+"  || Reading: "+filteredData[i].reading);
-				if (filteredData[i].reading > maxReading) {
+				if (Math.round(filteredData[i].reading) > maxReading) {
 					maxReading = filteredData[i].reading;
 				}
+				console.log("maxReading" + maxReading);
 			}
 
 			console.log(maxReading);
@@ -121,13 +122,13 @@
 				.attr('text-anchor', 'middle')
 			    .attr('font-family', 'sans-serif')
 			    .attr('fill', '#8C8C8C')
-			  	.attr('dy', '-270')
+			  	.attr('dy', -(maxRadius + 25))
 			  	.attr('transform', function (d) {
 			  		var r = 15 * d.hour;
 			  		return "rotate(" + r + ")";
 			  	})
 			  	.text(function (d) {
-			    return d.value;
+			    	return d.value;
 				});
 			// end of labels
 
@@ -186,7 +187,7 @@
 		var filteredData = [];
 
 		function getDataForDay(season, date, location, f){
-			$.getJSON('data/newDataDemo.json', function(data) {         
+			$.getJSON('data/data.json', function(data) {         
     			//console.log(data);		
     			var dataForSeason = data[location][season];
     			//console.log(dataForSeason);
@@ -201,10 +202,11 @@
 			});
 		}
 
-		getDataForDay("Spring","15/04/2010", "BRI", loadGraph);
+		getDataForDay("Summer","16/08/2010", "BRI", loadGraph);
 
 
 </script>
+
 		
 
 		
