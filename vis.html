@@ -6,10 +6,33 @@
 		<link rel="stylesheet" href="style.css" type="text/css">
 		<script src="http://d3js.org/d3.v3.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
 	</head>
 
 	<body>
 		<div class="canvas"></div>
+
+		<div id="day_select" class="pure-menu pure-menu-open pure-menu-horizontal">
+		    <ul>
+		        <li class="pure-menu-selected"><a href="#">Mon</a></li>
+		        <li><a href="#">Tue</a></li>
+		        <li><a href="#">Wed</a></li>
+		        <li><a href="#">Thu</a></li>
+		        <li><a href="#">Fri</a></li>
+		        <li><a href="#">Sat</a></li>
+		         <li><a href="#">Sun</a></li>
+		    </ul>
+		</div>
+		<div id="season_select" class="pure-menu pure-menu-open pure-menu-horizontal">
+		    <ul>
+		        <li class="pure-menu-selected"><a href="#">Spring</a></li>
+		        <li><a href="#">Summer</a></li>
+		        <li><a href="#">Autumn</a></li>
+		        <li><a href="#">Winter</a></li>
+		    </ul>
+		</div>
+
+
 
 		<script>
 
@@ -105,33 +128,37 @@
 		// end of labels
 
 
+		var arc = d3.svg.arc()
+			.innerRadius(20)
+			.outerRadius(function (d, i) {
+				return Math.round(20 + d.data.reading/3);	
+			});
 
+		var pie = d3.layout.pie()
+			.sort(null)
+			.value(function (d) {
+			   	return 1;
+			});
+
+
+
+		var graphData = []
 
 		// SEGMENTS
-		var loadGraph = function(filteredData){
+		var loadGraph = function(){
 
+			
 			var group = canvas.append('g')
-			    .attr('transform', 'translate(300, 300)');
+				.attr('transform', 'translate(300, 300)');
 
-			var arc = d3.svg.arc()
-			    .innerRadius(20)
-				.outerRadius(function (d, i) {
-					return Math.round(20 + d.data.reading/3);	
-				});
+			var g_path = group.selectAll('path')
+			    .data(pie(graphData));
 
-			var pie = d3.layout.pie()
-				.sort(null)
-			    .value(function (d) {
-			    	return 1;
-				});
+			var g_text = group.selectAll('text')
+				.data(pie(graphData));
+			
 
-			var arcs = group.selectAll('.arc')
-			    .data(pie(filteredData))
-			    .enter()
-			    .append('g')
-			    .attr('class', 'arc');
-
-			arcs.append('path')
+			g_path.enter().append('path')
 			    .attr('d', arc)
 			    .attr('stroke', 'white')
 			    .attr('stroke-width', '1')
@@ -140,7 +167,10 @@
 			    	return color(d.data.reading);
 				});
 
-			arcs.append('text')
+			g_path.exit().remove();
+
+
+			g_text.enter().append('text')
 			    .attr('text-anchor', 'middle')
 			    .attr('font-size', '12px')
 			    .attr('font-weight', 'bold')
@@ -150,19 +180,40 @@
 			    	return Math.round(d.data.reading);
 				})
 				.attr('transform', function (d) {
-					console.log(d);
 			    	var c = arc.centroid(d);
 			    	return "translate(" + c[0]*2.0 +"," + c[1]*2.0 + ")";
 				});
+
+			g_text.exit().remove();
 		}
+
+
+
+
+		$( "#season_select li" ).click(function() {
+			$("#season_select li").removeClass("pure-menu-selected");
+			$(this).addClass("pure-menu-selected");
+			var season = $(this).text();
+			getDataForSeasonAndDay(season, $('#day_select').find('.pure-menu-selected').text(), "BRI", loadGraph);
+		});
+
+		$( "#day_select li" ).click(function() {
+			$("#day_select li").removeClass("pure-menu-selected");
+			$(this).addClass("pure-menu-selected");
+			var day = $(this).text();
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), day, "BRI", loadGraph);
+		});
+
+
+
+
 
 
 
 		var filteredData = [];
 
 		function getDataForDay(season, date, location, f){
-			$.getJSON('data/data.json', function(data) {         
-    			console.log(data);		
+			$.getJSON('data/data.json', function(data) {         	
     			var dataForSeason = data[location][season];
     			console.log(dataForSeason);
     			var dataForDate;
@@ -176,8 +227,47 @@
 			});
 		}
 
+		function getDataForSeasonAndDay(season, day, location, f){
+			$.getJSON('data/data.json', function(data) {         
+    			var dataForSeason = data[location][season];
+    			var c = 0;
+    			var filteredData = [];
+    			for (i=0; i<24; i++){
+    				filteredData.push({"hour":i, "reading":0})
+    			}
+    			for(i=0; i<dataForSeason.length; i++){
+    				var dataForDay = dataForSeason[i];
+    				if(dataForDay.Day === day){
+    					for(x=0; x < dataForDay.Data.length; x++){
+    						var thisData = dataForDay.Data[x].reading;
+    						var val = 0;
+    						if(thisData !== "")
+    						{
+    							val = parseFloat(thisData);
+    						}
+    						filteredData[x].reading+=val;
+    					}
+    					c++;
+    				}
+    			}
 
-		getDataForDay("Summer","15/07/2010", "BRI", loadGraph);
+    			for(i=0; i<filteredData.length; i++){
+    				filteredData[i].reading = filteredData[i].reading/c;
+    			}
+
+    			graphData = filteredData;
+
+
+
+    			f();
+			});	
+		}
+
+
+
+		getDataForSeasonAndDay("Summer", "Sat", "BRI", loadGraph);
+
+
 
 </script>
 		
