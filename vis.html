@@ -35,104 +35,24 @@
 
 
 		<script>
+			var currentLocation = "BRI";
+			var width = 480;
+			var height = 480;
+			var verPadding = 30;
+			var horPadding = 30;
+			var maxRadius = (width / 2) - 10;
+			// dynamic center
+			var cx = (width / 2) + verPadding;
+			var cy = (height / 2) + horPadding;
+			// max shape space
 
-		// dimension vars
-		var height = 600,
-			width = 600,
-			radius = 50; // in use for circles
-
-		// color scale
-		var color = d3.scale.linear()
-			.domain([0, 700])
-		    .range(['white', 'blue']);
-
-		// canvas
-		var canvas = d3.select('.canvas').append('svg')
-		    .attr('width', width)
-		    .attr('height', height);
-
-		// axes
-		var circleData = [
-			{ "cx": 300, "cy": 300, "radius": 100 },
-			{ "cx": 300, "cy": 300, "radius": 200 },
-			{ "cx": 300, "cy": 300, "radius": 300 },
-			{ "cx": 300, "cy": 300, "radius": 400 },
-			{ "cx": 300, "cy": 300, "radius": 500 },
-			{ "cx": 300, "cy": 300, "radius": 600 },
-			{ "cx": 300, "cy": 300, "radius": 700 }
-		];
-
-		var circleGroup = canvas.append("g");
-
-		var circles = circleGroup.selectAll("circle")
-			.data(circleData)
-			.enter()
-			.append("circle");
-
-		var circleAttr = circles
-			.attr("cx", function (d) { return d.cx; })
-			.attr("cy", function (d) { return d.cy; })
-			.attr("r",  function (d) { return 20 + d.radius/3; })
-			.attr("fill", "none")
-			.attr("stroke", "#444444");
-
-		// time labels
-		var labelData = [ 
-			{ hour: 0, value: "00:00"},
-			{ hour: 1, value: "01:00"},
-			{ hour: 2, value: "02:00"},
-			{ hour: 3, value: "03:00"},
-			{ hour: 4, value: "04:00"},
-			{ hour: 5, value: "05:00"},
-			{ hour: 6, value: "06:00"},
-			{ hour: 7, value: "07:00"},
-			{ hour: 8, value: "08:00"},
-			{ hour: 9, value: "09:00"},
-			{ hour: 10, value: "10:00"},
-			{ hour: 11, value: "11:00"},
-			{ hour: 12, value: "12:00"},
-			{ hour: 13, value: "13:00"},
-			{ hour: 14, value: "14:00"},
-			{ hour: 15, value: "15:00"},
-			{ hour: 16, value: "16:00"},
-			{ hour: 17, value: "17:00"},
-			{ hour: 18, value: "18:00"},
-			{ hour: 19, value: "19:00"},
-			{ hour: 20, value: "20:00"},
-			{ hour: 21, value: "21:00"},
-			{ hour: 22, value: "22:00"},
-			{ hour: 23, value: "23:00"}
-		]
-
-		var labelGroup = canvas.append("g")
-			.attr('transform', 'translate(300, 300)');
-
-		var labels = labelGroup.selectAll("text")
-			.data(labelData)
-			.enter()
-			.append("text");
-
-		var labelAttr = labels
-			.attr('font-size', '10px')
-			.attr('text-anchor', 'middle')
-		    .attr('font-family', 'sans-serif')
-		    .attr('fill', '#8C8C8C')
-		  	.attr('dy', '-270')
-		  	.attr('transform', function (d) {
-		  		var r = 15 * d.hour;
-		  		return "rotate(" + r + ")";
-		  	})
-		  	.text(function (d) {
-		    return d.value;
-			});
-		// end of labels
+			var canvas = d3.select('.canvas').append('svg')
+			    .attr('width', width + (2 * verPadding))
+			    .attr('height', height + (2 * horPadding));
 
 
-		var arc = d3.svg.arc()
-			.innerRadius(20)
-			.outerRadius(function (d, i) {
-				return Math.round(20 + d.data.reading/3);	
-			});
+
+	
 
 		var pie = d3.layout.pie()
 			.sort(null)
@@ -144,16 +64,135 @@
 			.attr('class', 'graph_box');
 
 
+		var scaleGroup = canvas.append("g")
+							.attr("class", "scale_box")
 		var graphData = []
 
 		// SEGMENTS
 		var loadGraph = function(){
 
+
+			////SCALE STUFF//////
+
+
+
+			// compute scale ceiling
+			var maxReading = 0;
+
+			for(i=0; i<graphData.length; i++){
+				//console.log("Hour: "+graphData[i].hour+"  || Reading: "+graphData[i].reading);
+				if (Math.round(graphData[i].reading) > maxReading) {
+					maxReading = graphData[i].reading;
+				}
+				//console.log("maxReading" + maxReading);
+			}
+
+			//console.log(maxReading);
+
+			var scaleCeil = Math.ceil(maxReading/50)*50;
+
+			//console.log(scaleCeil);
+
+			// color scale
+			var color = d3.scale.linear()
+				.domain([0, scaleCeil])
+			    .range(['#DDDDDD', '#F25757']);
+
+			// data scale
+			var scale = d3.scale.linear()
+				.domain([0, scaleCeil])
+				.range([0, maxRadius]);
+
+			var arc = d3.svg.arc()
+				.innerRadius(20)
+				.outerRadius(function (d, i) {
+					return Math.round(20 + scale(d.data.reading));	
+				});	
+
+			var circleData = [];
+
+			for (var i = 0; (i * 50) <= scaleCeil; i++) {
+				circleData[i] = (i * 50);
+				//console.log("circleData i" + circleData[i]); 
+			}
+
+			// axes
+
+			var circles = scaleGroup.selectAll("circle")
+				.data(circleData)
+			
+			circles.enter()
+				.append("circle");
+
+			circles.exit().remove();
+
+			var circleAttr = circles
+				.transition()
+				.duration(500)
+				.attr("cx", cx)
+				.attr("cy", cy)
+				.attr("r",  function (d) { return 20 + scale(d); })
+				.attr("fill", "none")
+				.attr("stroke", "#444444")
+				.attr("stroke-dasharray", "1,4");
+
+			// time labels
+			var labelData = [ 
+				{ hour: 0, value: "00:00"},
+				{ hour: 1, value: "01:00"},
+				{ hour: 2, value: "02:00"},
+				{ hour: 3, value: "03:00"},
+				{ hour: 4, value: "04:00"},
+				{ hour: 5, value: "05:00"},
+				{ hour: 6, value: "06:00"},
+				{ hour: 7, value: "07:00"},
+				{ hour: 8, value: "08:00"},
+				{ hour: 9, value: "09:00"},
+				{ hour: 10, value: "10:00"},
+				{ hour: 11, value: "11:00"},
+				{ hour: 12, value: "12:00"},
+				{ hour: 13, value: "13:00"},
+				{ hour: 14, value: "14:00"},
+				{ hour: 15, value: "15:00"},
+				{ hour: 16, value: "16:00"},
+				{ hour: 17, value: "17:00"},
+				{ hour: 18, value: "18:00"},
+				{ hour: 19, value: "19:00"},
+				{ hour: 20, value: "20:00"},
+				{ hour: 21, value: "21:00"},
+				{ hour: 22, value: "22:00"},
+				{ hour: 23, value: "23:00"}
+			]
+
+			var labelGroup = canvas.append("g")
+				.attr('transform', 'translate(' + cx + ',' + cy + ')');
+
+			var labels = labelGroup.selectAll("text")
+				.data(labelData)
+				.enter()
+				.append("text");
+
+			var labelAttr = labels
+				.attr('font-size', '10px')
+				.attr('text-anchor', 'middle')
+			    .attr('font-family', 'sans-serif')
+			    .attr('fill', '#8C8C8C')
+			  	.attr('dy', -(maxRadius + 25))
+			  	.attr('transform', function (d) {
+			  		var r = 15 * d.hour;
+			  		return "rotate(" + r + ")";
+			  	})
+			  	.text(function (d) {
+			    	return d.value;
+				});
+
+			//////----------END OF SCALE STUFF ---------- ///////
+
 			
 			group = canvas.select('.graph_box')
-				.attr('transform', 'translate(300, 300)');
+				.attr('transform', 'translate('+cx+', '+cy+')');
 
-			console.log(group);
+			//console.log(group);
 
 			var g_path = group.selectAll('path')
 			    .data(pie(graphData));
@@ -172,6 +211,8 @@
 				});
 
 			g_path
+				.transition()
+				.duration(500)
 			    .attr('d', arc)
 			    .attr('stroke', 'white')
 			    .attr('stroke-width', '1')
@@ -199,6 +240,8 @@
 				});
 
 			g_text
+				.transition()
+				.duration(500)
 			    .attr('text-anchor', 'middle')
 			    .attr('font-size', '12px')
 			    .attr('font-weight', 'bold')
@@ -222,14 +265,14 @@
 			$("#season_select li").removeClass("pure-menu-selected");
 			$(this).addClass("pure-menu-selected");
 			var season = $(this).text();
-			getDataForSeasonAndDay(season, $('#day_select').find('.pure-menu-selected').text(), "BRI", loadGraph);
+			getDataForSeasonAndDay(season, $('#day_select').find('.pure-menu-selected').text(), currentLocation, loadGraph);
 		});
 
 		$( "#day_select li" ).click(function() {
 			$("#day_select li").removeClass("pure-menu-selected");
 			$(this).addClass("pure-menu-selected");
 			var day = $(this).text();
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), day, "BRI", loadGraph);
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), day, currentLocation, loadGraph);
 		});
 
 
@@ -243,14 +286,12 @@
 		function getDataForDay(season, date, location, f){
 			$.getJSON('data/data.json', function(data) {         	
     			var dataForSeason = data[location][season];
-    			console.log(dataForSeason);
     			var dataForDate;
     			for(i=0; i<dataForSeason.length; i++){
     				if(dataForSeason[i].Date===date){
     					dataForDate = dataForSeason[i].Data;
     				}
     			}
-    			console.log(dataForDate);
     			f(dataForDate);
 			});
 		}
@@ -293,7 +334,7 @@
 
 
 
-		getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(), "BRI", loadGraph);
+		getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(), currentLocation, loadGraph);
 
 
 
