@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>London Air Quality - Data Visualisation</title>
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<div class="canvas"></div>
+
+		<script>
+		// SEGMENTS
+		var loadGraph = function(filteredData){
+
+			// canvas dimensions
+			var width = 500;
+			var height = 500;
+			var verPadding = 50;
+			var horPadding = 50;
+			var maxRadius = (width / 2) - 10;
+			// dynamic center
+			var cx = (width / 2) + verPadding;
+			var cy = (height / 2) + horPadding;
+			// max shape space
+
+			var canvas = d3.select('.canvas').append('svg')
+			    .attr('width', width + (2 * verPadding))
+			    .attr('height', height + (2 * horPadding));
+
+			// compute scale ceiling
+			var maxReading = 0;
+
+			for(i=0; i<filteredData.length; i++){
+				console.log("Hour: "+filteredData[i].hour+"  || Reading: "+filteredData[i].reading);
+				if (filteredData[i].reading > maxReading) {
+					maxReading = filteredData[i].reading;
+				}
+			}
+
+			console.log(maxReading);
+
+			var scaleCeil = Math.ceil(maxReading/100)*100;
+
+			console.log(scaleCeil);
+
+			// color scale
+			var color = d3.scale.linear()
+				.domain([0, scaleCeil])
+			    .range(['#DDDDDD', '#F25757']);
+
+			// data scale
+			var scale = d3.scale.linear()
+				.domain([0, scaleCeil])
+				.range([0, maxRadius]);
+
+			var circleData = [];
+
+			for (var i = 0; (i * 50) <= scaleCeil; i++) {
+				circleData[i] = (i * 50);
+				console.log("circleData i" + circleData[i]); 
+			}
+
+			// axes
+
+			var circleGroup = canvas.append("g");
+
+			var circles = circleGroup.selectAll("circle")
+				.data(circleData)
+				.enter()
+				.append("circle");
+
+			var circleAttr = circles
+				.attr("cx", cx)
+				.attr("cy", cy)
+				.attr("r",  function (d) { return 20 + scale(d); })
+				.attr("fill", "none")
+				.attr("stroke", "#444444")
+				.attr("stroke-dasharray", "1,4");
+
+			// time labels
+			var labelData = [ 
+				{ hour: 0, value: "00:00"},
+				{ hour: 1, value: "01:00"},
+				{ hour: 2, value: "02:00"},
+				{ hour: 3, value: "03:00"},
+				{ hour: 4, value: "04:00"},
+				{ hour: 5, value: "05:00"},
+				{ hour: 6, value: "06:00"},
+				{ hour: 7, value: "07:00"},
+				{ hour: 8, value: "08:00"},
+				{ hour: 9, value: "09:00"},
+				{ hour: 10, value: "10:00"},
+				{ hour: 11, value: "11:00"},
+				{ hour: 12, value: "12:00"},
+				{ hour: 13, value: "13:00"},
+				{ hour: 14, value: "14:00"},
+				{ hour: 15, value: "15:00"},
+				{ hour: 16, value: "16:00"},
+				{ hour: 17, value: "17:00"},
+				{ hour: 18, value: "18:00"},
+				{ hour: 19, value: "19:00"},
+				{ hour: 20, value: "20:00"},
+				{ hour: 21, value: "21:00"},
+				{ hour: 22, value: "22:00"},
+				{ hour: 23, value: "23:00"}
+			]
+
+			var labelGroup = canvas.append("g")
+				.attr('transform', 'translate(' + cx + ',' + cy + ')');
+
+			var labels = labelGroup.selectAll("text")
+				.data(labelData)
+				.enter()
+				.append("text");
+
+			var labelAttr = labels
+				.attr('font-size', '10px')
+				.attr('text-anchor', 'middle')
+			    .attr('font-family', 'sans-serif')
+			    .attr('fill', '#8C8C8C')
+			  	.attr('dy', '-270')
+			  	.attr('transform', function (d) {
+			  		var r = 15 * d.hour;
+			  		return "rotate(" + r + ")";
+			  	})
+			  	.text(function (d) {
+			    return d.value;
+				});
+			// end of labels
+
+			
+
+			var group = canvas.append('g')
+			    .attr('transform', 'translate(' + cx + ',' + cy + ')');
+
+			var arc = d3.svg.arc()
+			    .innerRadius(20)
+				.outerRadius(function (d, i) {
+					return Math.round(20 + scale(d.data.reading));	
+				});
+
+			var pie = d3.layout.pie()
+				.sort(null)
+			    .value(function (d) {
+			    	return 1;
+				});
+
+			var arcs = group.selectAll('.arc')
+			    .data(pie(filteredData))
+			    .enter()
+			    .append('g')
+			    .attr('class', 'arc');
+
+			arcs.append('path')
+			    .attr('d', arc)
+			    .attr('stroke', 'white')
+			    .attr('stroke-width', '1')
+			    .attr('stroke-linecap', 'square')
+			    .attr('fill', function (d, i) {
+			    	return color(d.data.reading);
+				});
+
+			arcs.append('text')
+			    .attr('text-anchor', 'middle')
+			    .attr('font-size', '12px')
+			    .attr('font-weight', 'bold')
+			    .attr('font-family', 'sans-serif')
+			    .attr('fill', '#333333')
+			    .text(function (d, i) {
+			    	return Math.round(d.data.reading);
+				})
+				.attr('transform', function (d) {
+					//console.log(d);
+			    	var c = arc.centroid(d);
+			    	return "translate(" + c[0]*2.0 +"," + c[1]*2.0 + ")";
+				});
+
+			return maxReading;
+		}
+
+
+
+		var filteredData = [];
+
+		function getDataForDay(season, date, location, f){
+			$.getJSON('data/newDataDemo.json', function(data) {         
+    			//console.log(data);		
+    			var dataForSeason = data[location][season];
+    			//console.log(dataForSeason);
+    			var dataForDate;
+    			for(i=0; i<dataForSeason.length; i++){
+    				if(dataForSeason[i].Date===date){
+    					dataForDate = dataForSeason[i].Data;
+    				}
+    			}
+    			f(dataForDate);
+
+			});
+		}
+
+		getDataForDay("Spring","15/04/2010", "BRI", loadGraph);
+
+
+</script>
+		
+
+		
+		
+	</body>
+
+</html>
+
