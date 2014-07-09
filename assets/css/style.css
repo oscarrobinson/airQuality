@@ -6,20 +6,26 @@
 	float:left;
 	width: 50%;
 	height: 100%;
-	background-color: #3498db;
+	background-color: #eeeeee;
+	box-sizing:border-box;
+  	-moz-box-sizing:border-box;
+  	-webkit-box-sizing:border-box;
+  	border-right:1px solid #cccccc;
 }
 
 #site2 {
 	float:left;
 	width: 50%;
 	height: 100%;
-	background-color: #e74c3c;
+	background-color: #eeeeee;
 }
 
 #controls {
+	position: fixed;
+	bottom: 0;
 	height: 92px;
 	width: 100%;
-	background-color: #bdc3c7;
+	background-color: #cccccc;
 }
 
 .row {
@@ -42,7 +48,7 @@
 }
 
 .panel-wrapper {
-	padding: 5px !important;
+	padding: 5px 35px !important;
 }
 
 /* Font styles*/ 
@@ -50,4 +56,26 @@
 h2 {
 	font-size: 1.5em;
 	margin: .2em 0;
+}
+
+p {
+	font-size: 0.8em;
+	margin: .4em 0;
+}
+
+/* Chart styles */
+
+.trafficWrapper {
+	padding: 10px;
+}
+
+
+/* Temp styles */
+
+#p2 {
+	margin-top: 250px;
+}
+
+.panel-wrapper h2 {
+	text-align: center;
 }
