@@ -51,6 +51,7 @@ try:
 	jsonString+="], \"Summer\":["
 	prevDay = []
 
+
 	for day in s2Days:
 		if prevDay == []:
 			dayData+=["{\"hour\":"+day[3]+","+"\"reading\":"+"\""+day[5]+"\""+"},"]
@@ -99,12 +100,13 @@ try:
 			dayData+=["{\"hour\":"+day[3]+","+"\"reading\":"+"\""+day[5]+"\""+"},"]
 			prevDay = day;
 
+
 	jsonString = jsonString.rstrip(',')
 	jsonString+="]}"
 
 		
 finally:
-	text_file = open("data.json", 'a')
+	text_file = open(sys.argv[2]+".json", 'a')
 	text_file.write(jsonString)
 	text_file.close()
 	f.close()      # closing
