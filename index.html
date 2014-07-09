@@ -22,6 +22,7 @@
 				<div class="locationSwitch">
 					<div class="liquid-slider" id="siteSliderLeft">
 						<div id="eriLoc">
+							<div class="locationCode" id="ERI"></div>
 							<h2>Bexley - Erith</h2>
 							
 							<div class="iconStrip">
@@ -36,74 +37,120 @@
 							</script>
 						</div>
 						<div id="briLoc">
+							<div class="locationCode" id="BRI"></div>
 							<h2>Lambeth - Brixton</h2>
-							<p>Category: Industrial</p>
 							<div id="trafficWrapper2l"></div>
 							<script>
 								loadTraffic(briTraffic, 2, "l");			
 							</script>
 						</div>
 						<div id="horLoc">
+							<div class="locationCode" id="HOR"></div>
 							<h2>Westminster - Horseferry</h2>
-							<p>Category: Industrial</p>
 							<div id="trafficWrapper3l"></div>
 							<script>
 								loadTraffic(horTraffic, 3, "l");			
 							</script>
 						</div>
 						<div id="ricLoc">
+							<div class="locationCode" id="RIC"></div>
 							<h2>Richmond - Ntl Physical Lab</h2>
-							<p>Category: Industrial</p>
 							<div id="trafficWrapper4l"></div>
 							<script>
 								loadTraffic(ricTraffic, 4, "l");			
 							</script>
 						</div>
+						<div id="oxLoc">
+							<div class="locationCode" id="WM6"></div>
+							<h2>Westminster - Oxford Street</h2>
+							<div id="trafficWrapper5l"></div>
+							<script>
+								loadTraffic(oxTraffic, 5, "l");			
+							</script>
+						</div>
 					</div>
 				</div>
-				<p id="p1"></p>
-				<p id="p2"></p>
+
+
+				<div id="left-graph-container">
+					<div class="canvas" id="canvasLeft"></div>
+				</div>
 			</div>
+
 			<div id="site2">
 				<div class="locationSwitch">
 					<div class="liquid-slider" id="siteSliderRight">
 						<div id="eriLoc">
+							<div class="locationCode" id="ERI"></div>
 							<h2>Bexley - Erith</h2>
-							<p>Category: Industrial</p>
 							<div id="trafficWrapper1r"></div>
 							<script>
 								loadTraffic(eriTraffic, 1, "r");
 							</script>
 						</div>
 						<div id="briLoc">
+							<div class="locationCode" id="BRI"></div>
 							<h2>Lambeth - Brixton</h2>
-							<p>Category: Industrial</p>
 							<div id="trafficWrapper2r"></div>
 							<script>
 								loadTraffic(briTraffic, 2, "r");			
 							</script>
 						</div>
 						<div id="horLoc">
+							<div class="locationCode" id="HOR"></div>
 							<h2>Westminster - Horseferry</h2>
-							<p>Category: Industrial</p>
 							<div id="trafficWrapper3r"></div>
 							<script>
 								loadTraffic(horTraffic, 3, "r");			
 							</script>
 						</div>
 						<div id="ricLoc">
+							<div class="locationCode" id="RIC"></div>
 							<h2>Richmond - Ntl Physical Lab</h2>
-							<p>Category: Industrial</p>
 							<div id="trafficWrapper4r"></div>
 							<script>
 								loadTraffic(ricTraffic, 4, "r");			
 							</script>
 						</div>
+						<div id="oxLoc">
+							<div class="locationCode" id="WM6"></div>
+							<h2>Westminster - Oxford Street</h2>
+							<div id="trafficWrapper5r"></div>
+							<script>
+								loadTraffic(oxTraffic, 5, "r");			
+							</script>
+						</div>
 					</div>
 				</div>
+				<div id="right-graph-container">
+					<div class="canvas" id="canvasRight"></div>
+				</div>
 			</div>
+
+
 		</div>
 		<div id="controls">
+			<div id="time-controls">
+			<div id="day_select" class="pure-menu pure-menu-open pure-menu-horizontal">
+			    <ul>
+			        <li class="pure-menu-selected"><a href="#">Mon</a></li>
+			        <li><a href="#">Tue</a></li>
+			        <li><a href="#">Wed</a></li>
+			        <li><a href="#">Thu</a></li>
+			        <li><a href="#">Fri</a></li>
+			        <li><a href="#">Sat</a></li>
+			         <li><a href="#">Sun</a></li>
+			    </ul>
+			</div>
+			<div id="season_select" class="pure-menu pure-menu-open pure-menu-horizontal">
+			    <ul>
+			        <li class="pure-menu-selected"><a href="#">Spring</a></li>
+			        <li><a href="#">Summer</a></li>
+			        <li><a href="#">Autumn</a></li>
+			        <li><a href="#">Winter</a></li>
+			    </ul>
+			</div>
+			</div>
 		</div>
 		<div id="testModal">
 			<a class="modal_close" href="#"></a>
@@ -122,15 +169,12 @@
 			rowElement.style.height = rowHeight;
 			console.log(rowElement);
 
-			document.getElementById("p1").innerHTML = "row height" +  rowHeight + "row width" + windowWidth;
 
 			var colWidth = $("#site1").width();
 			console.log(colWidth);
 
 			var panelWidth = $("#firstSlide").width();
 			console.log(panelWidth);
-
-			document.getElementById("p2").innerHTML = "col width" + colWidth + panelWidth;
 
 
 		</script>
@@ -141,18 +185,450 @@
 		$(function(){
 		     $('#siteSliderLeft').liquidSlider({
 		     	hoverArrows: false,
-		     	slideEaseDuration: 300
+		     	slideEaseDuration: 300,
+		     	callback: function(){
+
+		     		setCurrentLocations();
+		     	}
+				
 		     });
 		});
 
 		$(function(){
 		     $('#siteSliderRight').liquidSlider({
 		     	hoverArrows: false,
-		     	slideEaseDuration: 300
+		     	slideEaseDuration: 300,
+		     	callback: function(){
+		     		setCurrentLocations();
+		     	}
 		     });
 		});
 
 		$("#infoEri").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
+
+		var currentLocationLeft = "ERI";
+		var currentLocationRight = "ERI";
+
+
+		function setCurrentLocations(){
+			var s1 = $("#site1").find( "#siteSliderLeft .currentPanel").find(".panel-wrapper").find(".locationCode");
+			var s2 = $("#site2").find( "#siteSliderRight .currentPanel").find(".panel-wrapper").find(".locationCode");
+			currentLocationRight = $(s1).closest(".locationCode").attr("id");
+			currentLocationLeft = $(s2).closest(".locationCode").attr("id");
+			console.log(currentLocationRight);
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),currentLocationLeft, "left");
+
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				currentLocationRight, "right");
+
+		}
+
+
+			var width = 370;
+			var height = 370;
+			var verPadding = 110;
+			var horPadding = 110;
+			var maxRadius = (width / 2) - 10;
+			// dynamic center
+			var cx = (width / 2) + verPadding;
+			var cy = (height / 2) + horPadding;
+			// max shape space
+
+			var  canvasLeft = d3.select('#canvasLeft').append('svg')
+			    .attr('width', width + (2 * verPadding))
+			    .attr('height', height + (2 * horPadding));
+
+			var canvasRight = d3.select('#canvasRight').append('svg')
+			    .attr('width', width + (2 * verPadding))
+			    .attr('height', height + (2 * horPadding));
+
+
+		var pie = d3.layout.pie()
+			.sort(null)
+			.value(function (d) {
+			   	return 1;
+			});
+
+		var groupLeft = canvasLeft.append('g')
+			.attr('class', 'graph_box_left');
+
+		var groupRight = canvasRight.append('g')
+			.attr('class', 'graph_box_right');
+
+
+		var leftScaleGroup = canvasLeft.append("g")
+							.attr("class", "scale_box_left")
+
+		var rightScaleGroup = canvasRight.append("g")
+							.attr("class", "scale_box_right")
+
+		var graphData = []
+
+		// SEGMENTS
+		var loadGraph = function(graphData, scaleGroup, canvas,side, scaleMax){
+
+
+			////SCALE STUFF//////
+
+			//console.log(scaleMax);
+
+			// compute scale ceiling
+			var maxReading = parseFloat(scaleMax);
+
+		/*	for(i=0; i<graphData.length; i++){
+				//console.log("Hour: "+graphData[i].hour+"  || Reading: "+graphData[i].reading);
+				if (Math.round(graphData[i].reading) > maxReading) {
+					maxReading = graphData[i].reading;
+				}
+				//console.log("maxReading" + maxReading);
+			}*/
+
+			//console.log(maxReading);
+
+			var scaleCeil = Math.ceil(maxReading/50)*50;
+
+			//console.log(scaleCeil);
+
+			// color scale
+			var color = d3.scale.linear()
+				.domain([0, scaleCeil])
+			    .range(['#DDDDDD', '#F25757']);
+
+			// data scale
+			var scale = d3.scale.linear()
+				.domain([0, scaleCeil])
+				.range([0, maxRadius]);
+
+			var arc = d3.svg.arc()
+				.innerRadius(20)
+				.outerRadius(function (d, i) {
+					return Math.round(20 + scale(d.data.reading));	
+				});	
+
+			var circleData = [];
+
+			for (var i = 0; (i * 50) <= scaleCeil; i++) {
+				circleData[i] = (i * 50);
+				//console.log("circleData i" + circleData[i]); 
+			}
+
+			// axes
+
+			var circles = scaleGroup.selectAll("circle")
+				.data(circleData)
+			
+			circles.enter()
+				.append("circle");
+
+			circles.exit().remove();
+
+			var circleAttr = circles
+				.transition()
+				.duration(500)
+				.attr("cx", cx)
+				.attr("cy", cy)
+				.attr("r",  function (d) { return 20 + scale(d); })
+				.attr("fill", "none")
+				.attr("stroke", "#444444")
+				.attr("stroke-dasharray", "1,4");
+
+			// time labels
+			var labelData = [ 
+				{ hour: 0, value: "12:00"},
+				{ hour: 1, value: "13:00"},
+				{ hour: 2, value: "14:00"},
+				{ hour: 3, value: "15:00"},
+				{ hour: 4, value: "16:00"},
+				{ hour: 5, value: "17:00"},
+				{ hour: 6, value: "18:00"},
+				{ hour: 7, value: "19:00"},
+				{ hour: 8, value: "20:00"},
+				{ hour: 9, value: "21:00"},
+				{ hour: 10, value: "22:00"},
+				{ hour: 11, value: "23:00"},
+				{ hour: 12, value: "00:00"},
+				{ hour: 13, value: "01:00"},
+				{ hour: 14, value: "02:00"},
+				{ hour: 15, value: "03:00"},
+				{ hour: 16, value: "04:00"},
+				{ hour: 17, value: "05:00"},
+				{ hour: 18, value: "06:00"},
+				{ hour: 19, value: "07:00"},
+				{ hour: 20, value: "08:00"},
+				{ hour: 21, value: "09:00"},
+				{ hour: 22, value: "10:00"},
+				{ hour: 23, value: "11:00"}
+			]
+
+			var labelGroup = canvas.append("g")
+				.attr('transform', 'translate(' + cx + ',' + cy + ')');
+
+			var labels = labelGroup.selectAll("text")
+				.data(labelData)
+				.enter()
+				.append("text");
+
+			canvas.append('text')
+				.attr('class', 'unitText')
+				.attr('transform', 'translate(' + cx + ',' + cy + ')')
+				.text('NO2')
+				.attr('dx', "-1em");
+
+			canvas.append('text')
+				.attr('class', 'unitText')
+				.attr('transform', 'translate(' + cx + ',' + cy + ')')
+				.text('ug m-3')
+				.attr('dx', "-1.6em")
+				.attr('dy', "1em");
+
+			var labelAttr = labels
+				.attr('font-size', '10px')
+				.attr('text-anchor', 'middle')
+			    .attr('font-family', 'sans-serif')
+			    .attr('fill', '#8C8C8C')
+			  	.attr('dy', -(maxRadius + 25))
+			  	.attr('transform', function (d) {
+			  		var r = 15 * d.hour;
+			  		return "rotate(" + r + ")";
+			  	})
+			  	.text(function (d) {
+			    	return d.value;
+				});
+
+			//////----------END OF SCALE STUFF ---------- ///////
+
+			
+			group = canvas.select('.graph_box_'+side)
+				.attr('transform', 'translate('+cx+', '+cy+')');
+
+			//console.log(group);
+
+			var g_path = group.selectAll('path')
+			    .data(pie(graphData));
+
+			var g_text = group.selectAll('text')
+				.data(pie(graphData));
+			
+
+			g_path.enter().append('path')
+			    .attr('d', arc)
+			    .attr('stroke', 'white')
+			    .attr('stroke-width', '1')
+			    .attr('stroke-linecap', 'square')
+			    .attr('fill', function (d, i) {
+			    	return color(d.data.reading);
+				});
+
+			g_path
+				.transition()
+				.duration(500)
+			    .attr('d', arc)
+			    .attr('stroke', 'white')
+			    .attr('stroke-width', '1')
+			    .attr('stroke-linecap', 'square')
+			    .attr('fill', function (d, i) {
+			    	return color(d.data.reading);
+				});
+
+
+			g_path.exit().remove();
+
+
+			g_text.enter().append('text')
+			    .attr('text-anchor', 'middle')
+			    .attr('font-size', '9px')
+			    .attr('font-weight', 'bold')
+			    .attr('font-family', 'sans-serif')
+			    .attr('fill', '#333333')
+			    .text(function (d, i) {
+			    	return Math.round(d.data.reading);
+				})
+				.attr('transform', function (d) {
+			    	var c = arc.centroid(d);
+			    	return "translate(" + c[0]*2.0 +"," + c[1]*2.0 + ")";
+				});
+
+			g_text
+				.transition()
+				.duration(500)
+			    .attr('text-anchor', 'middle')
+			    .attr('font-size', '9px')
+			    .attr('font-weight', 'bold')
+			    .attr('font-family', 'sans-serif')
+			    .attr('fill', '#333333')
+			    .text(function (d, i) {
+			    	return Math.round(d.data.reading);
+				})
+				.attr('transform', function (d) {
+			    	var c = arc.centroid(d);
+			    	return "translate(" + c[0]*2.0 +"," + c[1]*2.0 + ")";
+				});
+
+			g_text.exit().remove();
+		}
+
+
+
+
+		$( "#season_select li" ).click(function() {
+			$("#season_select li").removeClass("pure-menu-selected");
+			$(this).addClass("pure-menu-selected");
+			var season = $(this).text();
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				currentLocationLeft, "left");
+
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				currentLocationRight, "right");
+		});
+
+		$( "#day_select li" ).click(function() {
+			$("#day_select li").removeClass("pure-menu-selected");
+			$(this).addClass("pure-menu-selected");
+			var day = $(this).text();
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				currentLocationLeft, "left");
+
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				currentLocationRight, "right");
+		});
+
+
+
+
+
+
+
+		var filteredData = [];
+
+		function getDataForDay(season, date, location, f){
+			$.getJSON('data/data.json', function(data) {         	
+    			var dataForSeason = data[location][season];
+    			var dataForDate;
+    			for(i=0; i<dataForSeason.length; i++){
+    				if(dataForSeason[i].Date===date){
+    					dataForDate = dataForSeason[i].Data;
+    				}
+    			}
+    			f(dataForDate);
+			});
+		}
+
+
+
+		function getDataForDayInSeason(dataForSeason, day){
+			    var c = 0;
+    			var filteredData = [];
+    			for (i=0; i<24; i++){
+    				filteredData.push({"hour":i, "reading":0})
+    			}
+    			for(i=0; i<dataForSeason.length; i++){
+    				var dataForDay = dataForSeason[i];
+    				if(dataForDay.Day === day){
+    					for(x=0; x < dataForDay.Data.length; x++){
+    						var noDataForDayFlag = false;
+    						var thisData = dataForDay.Data[x].reading;
+    						var val = 0;
+    						if(thisData !== "")
+    						{
+    							val = parseFloat(thisData);
+    						}
+    						else{
+    							noDataForDayFlag=true;
+    						}
+    						//console.log(val);
+    						filteredData[x].reading+=val;
+    					}
+    					if(!noDataForDayFlag){
+    						c++;
+    					}
+    				}
+    			}
+
+    			for(i=0; i<filteredData.length; i++){
+    				filteredData[i].reading = filteredData[i].reading/c;
+    			}
+
+    			return filteredData;
+		}
+
+		function getMaxForWeek(data, season, location1, location2){
+			var location1Data = data[location1][season];
+			var location2Data = data[location2][season];
+			var max1 = getMaxForLocationSeason(location1Data);
+			var max2 = getMaxForLocationSeason(location2Data);
+			//console.log("Max For Location 1: "+max1+" || Max For Location 2: "+max2);
+			if(max1 > max2){
+				return max1;
+			}
+			else{
+				return max2;
+			}
+		}
+
+
+		function getMaxForLocationSeason (dataForLocSeason){
+				var maxReading = 0;
+				var filteredData = [];
+				var days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+				//console.log(days.length);
+				for(y=0; y<days.length; y++){
+					//console.log("pushing data for day "+days[y])
+					filteredData.push(getDataForDayInSeason(dataForLocSeason, days[y]));
+				}
+
+				//console.log(filteredData);
+
+				for(i=0; i<filteredData.length; i++){
+					var dayData = filteredData[i];
+					for (x=0; x<dayData.length; x++){
+						if(dayData[x].reading!==""){
+							//console.log("Day Data "+dataForLoc[i].Day+" "+dataForLoc[i].Date+": "+Math.round(dayData[x].reading));
+							if (Math.round(dayData[x].reading) > maxReading) {
+								maxReading = Math.round(dayData[x].reading);
+								//console.log("New Max Reading: "+maxReading);
+							}
+						}
+					}
+				}
+
+				return maxReading;
+		}
+
+
+		function getDataForSeasonAndDay(season, day, location, graphSide){
+			$.getJSON('data/data.json', function(data) {         
+    			var dataForSeason = data[location][season];
+    			console.log(dataForSeason);
+    			//console.log(maxDataReading);
+    			//console.log(dataForSeason);
+    			var filteredData = getDataForDayInSeason(dataForSeason,day);
+    			var maxDataReading = getMaxForWeek(data, season, currentLocationLeft, currentLocationRight);
+
+    			//console.log(maxDataReading);
+    			flippedData = []
+
+    			for(h=12; h<24; h++){
+    				flippedData.push(filteredData[h]);
+    			}
+    			for(h=0; h<12; h++){
+    				flippedData.push(filteredData[h]);
+    			}
+
+    			if(graphSide === "left"){
+    				loadGraph(flippedData, leftScaleGroup, canvasRight,"right", maxDataReading);
+    			}
+    			if(graphSide === "right"){
+    				loadGraph(flippedData, rightScaleGroup, canvasLeft, "left", maxDataReading);
+    			}
+			});	
+		}
+
+
+
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),currentLocationLeft, "left");
+
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				currentLocationRight, "right");
 
 		</script>
 	</body>

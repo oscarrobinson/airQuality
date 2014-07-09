@@ -26,6 +26,7 @@
 	width: 100%;
 	height: 100%;
 	clear: both;
+	overflow:hidden;
 }
 
 .clearfix {
@@ -41,13 +42,22 @@
 	background-color: #eeeeee;
 }
 
+#left-graph-container{
+	height: 626px;
+	background-color: #ff0000;
+}
+
+#right-graph-container{
+	height: 626px;
+	background-color: #ff0000;
+}
 .panel-wrapper {
 	padding: 5px !important;
 }
 
-/* Font styles*/ 
-
-h2 {
-	font-size: 1.5em;
-	margin: .2em 0;
+.unitText{
+	font-size:7pt;
+	font-weight: bold;
+	font-style:italic;
 }
+

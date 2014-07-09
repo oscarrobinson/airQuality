@@ -121,3 +121,25 @@ p {
 	float:left;
 	padding: 5px;
 }
+
+.unitText{
+	font-size:7pt;
+	font-weight: bold;
+	font-style:italic;
+}
+
+#left-graph-container{
+	height: 626px;
+}
+
+#right-graph-container{
+	height: 626px;
+}
+
+#time-controls{
+	margin-top:10px;
+	width:500px;
+	margin-left:auto;
+	margin-right:auto;
+}
+

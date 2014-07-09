@@ -4,6 +4,7 @@ var horTraffic = [18418, 1333, 918, 1522, 22190];
 var ricTraffic = [15245, 366, 332, 173, 16116];
 var eriTraffic = [27031, 520, 4224, 347, 32122];
 var briTraffic = [23316, 4734, 907, 2191, 31147];
+var oxTraffic = [6900, 2767, 53, 506, 10225];
 
 var width = 420,
 	height = 70;
