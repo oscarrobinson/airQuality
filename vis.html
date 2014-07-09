@@ -101,23 +101,23 @@
 		var graphData = []
 
 		// SEGMENTS
-		var loadGraph = function(graphData, scaleGroup, canvas,side){
+		var loadGraph = function(graphData, scaleGroup, canvas,side, scaleMax){
 
 
 			////SCALE STUFF//////
 
-
+			//console.log(scaleMax);
 
 			// compute scale ceiling
-			var maxReading = 0;
+			var maxReading = parseFloat(scaleMax);
 
-			for(i=0; i<graphData.length; i++){
+		/*	for(i=0; i<graphData.length; i++){
 				//console.log("Hour: "+graphData[i].hour+"  || Reading: "+graphData[i].reading);
 				if (Math.round(graphData[i].reading) > maxReading) {
 					maxReading = graphData[i].reading;
 				}
 				//console.log("maxReading" + maxReading);
-			}
+			}*/
 
 			//console.log(maxReading);
 
@@ -358,11 +358,10 @@
 			});
 		}
 
-		function getDataForSeasonAndDay(season, day, location, graphSide){
-			$.getJSON('data/data.json', function(data) {         
-    			var dataForSeason = data[location][season];
-    			console.log(dataForSeason);
-    			var c = 0;
+
+
+		function getDataForDayInSeason(dataForSeason, day){
+			    var c = 0;
     			var filteredData = [];
     			for (i=0; i<24; i++){
     				filteredData.push({"hour":i, "reading":0})
@@ -377,7 +376,7 @@
     						{
     							val = parseFloat(thisData);
     						}
-    						console.log(val);
+    						//console.log(val);
     						filteredData[x].reading+=val;
     					}
     					c++;
@@ -388,11 +387,68 @@
     				filteredData[i].reading = filteredData[i].reading/c;
     			}
 
+    			return filteredData;
+		}
+
+		function getMaxForWeek(data, season, location1, location2){
+			var location1Data = data[location1][season];
+			var location2Data = data[location2][season];
+			var max1 = getMaxForLocationSeason(location1Data);
+			var max2 = getMaxForLocationSeason(location2Data);
+			//console.log("Max For Location 1: "+max1+" || Max For Location 2: "+max2);
+			if(max1 > max2){
+				return max1;
+			}
+			else{
+				return max2;
+			}
+		}
+
+
+		function getMaxForLocationSeason (dataForLocSeason){
+				var maxReading = 0;
+				var filteredData = [];
+				var days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+				//console.log(days.length);
+				for(y=0; y<days.length; y++){
+					//console.log("pushing data for day "+days[y])
+					filteredData.push(getDataForDayInSeason(dataForLocSeason, days[y]));
+				}
+
+				//console.log(filteredData);
+
+				for(i=0; i<filteredData.length; i++){
+					var dayData = filteredData[i];
+					for (x=0; x<dayData.length; x++){
+						if(dayData[x].reading!==""){
+							//console.log("Day Data "+dataForLoc[i].Day+" "+dataForLoc[i].Date+": "+Math.round(dayData[x].reading));
+							if (Math.round(dayData[x].reading) > maxReading) {
+								maxReading = Math.round(dayData[x].reading);
+								//console.log("New Max Reading: "+maxReading);
+							}
+						}
+					}
+				}
+
+				return maxReading;
+		}
+
+
+		function getDataForSeasonAndDay(season, day, location, graphSide){
+			$.getJSON('data/data.json', function(data) {         
+    			var dataForSeason = data[location][season];
+    			//console.log(maxDataReading);
+    			//console.log(dataForSeason);
+    			var filteredData = getDataForDayInSeason(dataForSeason,day);
+    			var maxDataReading = getMaxForWeek(data, season, $('#left_location_select').find('.pure-menu-selected').text(), $('#right_location_select').find('.pure-menu-selected').text());
+
+    			//console.log(maxDataReading);
+
     			if(graphSide === "left"){
-    				loadGraph(filteredData, leftScaleGroup, canvasLeft,"left");
+    				loadGraph(filteredData, leftScaleGroup, canvasLeft,"left", maxDataReading);
     			}
     			if(graphSide === "right"){
-    				loadGraph(filteredData, rightScaleGroup, canvasRight, "right")
+    				loadGraph(filteredData, rightScaleGroup, canvasRight, "right", maxDataReading);
     			}
 			});	
 		}
