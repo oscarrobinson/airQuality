@@ -3,14 +3,39 @@
 
 	<head>
 		<title>London Air Quality - Data Visualisation</title>
-		<link rel="stylesheet" href="style.css" type="text/css">
+		<link rel="stylesheet" href="tempStyle.css" type="text/css">
 		<script src="http://d3js.org/d3.v3.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
 	</head>
 
 	<body>
-		<div class="canvas"></div>
+		<div id="graphs-container">
+			<div id="left-graph-container">
+				<div id="left_location_select" class="pure-menu pure-menu-open pure-menu-horizontal">
+				    <ul>
+				        <li class="pure-menu-selected"><a href="#">ERI</a></li>
+				        <li><a href="#">BRI</a></li>
+				        <li><a href="#">HOR</a></li>
+				        <li><a href="#">RIC</a></li>
+				    </ul>
+				</div>
+				<div class="canvas" id="canvasLeft"></div>
+			</div>
+
+			<div id="right-graph-container">
+				<div id="right_location_select" class="pure-menu pure-menu-open pure-menu-horizontal">
+				    <ul>
+				        <li class="pure-menu-selected"><a href="#">ERI</a></li>
+				        <li><a href="#">BRI</a></li>
+				        <li><a href="#">HOR</a></li>
+				        <li><a href="#">RIC</a></li>
+				    </ul>
+				</div>
+				<div class="canvas" id="canvasRight"></div>
+			</div>
+		</div>
+
 
 		<div id="day_select" class="pure-menu pure-menu-open pure-menu-horizontal">
 		    <ul>
@@ -35,7 +60,6 @@
 
 
 		<script>
-			var currentLocation = "HOR";
 			var width = 480;
 			var height = 480;
 			var verPadding = 30;
@@ -46,13 +70,14 @@
 			var cy = (height / 2) + horPadding;
 			// max shape space
 
-			var canvas = d3.select('.canvas').append('svg')
+			var  canvasLeft = d3.select('#canvasLeft').append('svg')
 			    .attr('width', width + (2 * verPadding))
 			    .attr('height', height + (2 * horPadding));
 
+			var canvasRight = d3.select('#canvasRight').append('svg')
+			    .attr('width', width + (2 * verPadding))
+			    .attr('height', height + (2 * horPadding));
 
-
-	
 
 		var pie = d3.layout.pie()
 			.sort(null)
@@ -60,16 +85,23 @@
 			   	return 1;
 			});
 
-		var group = canvas.append('g')
-			.attr('class', 'graph_box');
+		var groupLeft = canvasLeft.append('g')
+			.attr('class', 'graph_box_left');
+
+		var groupRight = canvasRight.append('g')
+			.attr('class', 'graph_box_right');
 
 
-		var scaleGroup = canvas.append("g")
-							.attr("class", "scale_box")
+		var leftScaleGroup = canvasLeft.append("g")
+							.attr("class", "scale_box_left")
+
+		var rightScaleGroup = canvasRight.append("g")
+							.attr("class", "scale_box_right")
+
 		var graphData = []
 
 		// SEGMENTS
-		var loadGraph = function(){
+		var loadGraph = function(graphData, scaleGroup, canvas,side){
 
 
 			////SCALE STUFF//////
@@ -189,7 +221,7 @@
 			//////----------END OF SCALE STUFF ---------- ///////
 
 			
-			group = canvas.select('.graph_box')
+			group = canvas.select('.graph_box_'+side)
 				.attr('transform', 'translate('+cx+', '+cy+')');
 
 			//console.log(group);
@@ -265,14 +297,44 @@
 			$("#season_select li").removeClass("pure-menu-selected");
 			$(this).addClass("pure-menu-selected");
 			var season = $(this).text();
-			getDataForSeasonAndDay(season, $('#day_select').find('.pure-menu-selected').text(), currentLocation, loadGraph);
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				$('#left_location_select').find('.pure-menu-selected').text(), "left");
+
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				$('#right_location_select').find('.pure-menu-selected').text(), "right");
 		});
 
 		$( "#day_select li" ).click(function() {
 			$("#day_select li").removeClass("pure-menu-selected");
 			$(this).addClass("pure-menu-selected");
 			var day = $(this).text();
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), day, currentLocation, loadGraph);
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				$('#left_location_select').find('.pure-menu-selected').text(), "left");
+
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				$('#right_location_select').find('.pure-menu-selected').text(), "right");
+		});
+
+		$( "#right_location_select li" ).click(function() {
+			$("#right_location_select li").removeClass("pure-menu-selected");
+			$(this).addClass("pure-menu-selected");
+			var day = $(this).text();
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				$('#left_location_select').find('.pure-menu-selected').text(), "left");
+
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				$('#right_location_select').find('.pure-menu-selected').text(), "right");
+		});
+
+		$( "#left_location_select li" ).click(function() {
+			$("#left_location_select li").removeClass("pure-menu-selected");
+			$(this).addClass("pure-menu-selected");
+			var day = $(this).text();
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				$('#left_location_select').find('.pure-menu-selected').text(), "left");
+
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				$('#right_location_select').find('.pure-menu-selected').text(), "right");
 		});
 
 
@@ -296,7 +358,7 @@
 			});
 		}
 
-		function getDataForSeasonAndDay(season, day, location, f){
+		function getDataForSeasonAndDay(season, day, location, graphSide){
 			$.getJSON('data/data.json', function(data) {         
     			var dataForSeason = data[location][season];
     			console.log(dataForSeason);
@@ -326,17 +388,21 @@
     				filteredData[i].reading = filteredData[i].reading/c;
     			}
 
-    			graphData = filteredData;
-
-
-
-    			f();
+    			if(graphSide === "left"){
+    				loadGraph(filteredData, leftScaleGroup, canvasLeft,"left");
+    			}
+    			if(graphSide === "right"){
+    				loadGraph(filteredData, rightScaleGroup, canvasRight, "right")
+    			}
 			});	
 		}
 
 
 
-		getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(), currentLocation, loadGraph);
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),$('#left_location_select').find('.pure-menu-selected').text(), "left");
+
+			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+				$('#right_location_select').find('.pure-menu-selected').text(), "right");
 
 
 

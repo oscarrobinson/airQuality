@@ -1,0 +1,16 @@
+#graphs-container{
+	align:center;
+}
+
+#left-graph-container {
+	min-width:400px;
+	width:50%;
+	height:100%;
+	float:right;
+}
+#right-graph-container {
+	min-width:400px;
+	width:50%;
+	height:100%;
+}
+
