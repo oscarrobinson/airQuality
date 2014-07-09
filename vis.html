@@ -8,6 +8,13 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
 	</head>
+	<style>
+		.unitText{
+			font-size:7pt;
+			font-weight: bold;
+			font-style:italic;
+		}
+	</style>
 
 	<body>
 		<div id="graphs-container">
@@ -172,30 +179,30 @@
 
 			// time labels
 			var labelData = [ 
-				{ hour: 0, value: "00:00"},
-				{ hour: 1, value: "01:00"},
-				{ hour: 2, value: "02:00"},
-				{ hour: 3, value: "03:00"},
-				{ hour: 4, value: "04:00"},
-				{ hour: 5, value: "05:00"},
-				{ hour: 6, value: "06:00"},
-				{ hour: 7, value: "07:00"},
-				{ hour: 8, value: "08:00"},
-				{ hour: 9, value: "09:00"},
-				{ hour: 10, value: "10:00"},
-				{ hour: 11, value: "11:00"},
-				{ hour: 12, value: "12:00"},
-				{ hour: 13, value: "13:00"},
-				{ hour: 14, value: "14:00"},
-				{ hour: 15, value: "15:00"},
-				{ hour: 16, value: "16:00"},
-				{ hour: 17, value: "17:00"},
-				{ hour: 18, value: "18:00"},
-				{ hour: 19, value: "19:00"},
-				{ hour: 20, value: "20:00"},
-				{ hour: 21, value: "21:00"},
-				{ hour: 22, value: "22:00"},
-				{ hour: 23, value: "23:00"}
+				{ hour: 0, value: "12:00"},
+				{ hour: 1, value: "13:00"},
+				{ hour: 2, value: "14:00"},
+				{ hour: 3, value: "15:00"},
+				{ hour: 4, value: "16:00"},
+				{ hour: 5, value: "17:00"},
+				{ hour: 6, value: "18:00"},
+				{ hour: 7, value: "19:00"},
+				{ hour: 8, value: "20:00"},
+				{ hour: 9, value: "21:00"},
+				{ hour: 10, value: "22:00"},
+				{ hour: 11, value: "23:00"},
+				{ hour: 12, value: "00:00"},
+				{ hour: 13, value: "01:00"},
+				{ hour: 14, value: "02:00"},
+				{ hour: 15, value: "03:00"},
+				{ hour: 16, value: "04:00"},
+				{ hour: 17, value: "05:00"},
+				{ hour: 18, value: "06:00"},
+				{ hour: 19, value: "07:00"},
+				{ hour: 20, value: "08:00"},
+				{ hour: 21, value: "09:00"},
+				{ hour: 22, value: "10:00"},
+				{ hour: 23, value: "11:00"}
 			]
 
 			var labelGroup = canvas.append("g")
@@ -205,6 +212,19 @@
 				.data(labelData)
 				.enter()
 				.append("text");
+
+			canvas.append('text')
+				.attr('class', 'unitText')
+				.attr('transform', 'translate(' + cx + ',' + cy + ')')
+				.text('NO2')
+				.attr('dx', "-1em");
+
+			canvas.append('text')
+				.attr('class', 'unitText')
+				.attr('transform', 'translate(' + cx + ',' + cy + ')')
+				.text('ug m-3')
+				.attr('dx', "-1.6em")
+				.attr('dy', "1em");
 
 			var labelAttr = labels
 				.attr('font-size', '10px')
@@ -451,12 +471,20 @@
     			var maxDataReading = getMaxForWeek(data, season, $('#left_location_select').find('.pure-menu-selected').text(), $('#right_location_select').find('.pure-menu-selected').text());
 
     			//console.log(maxDataReading);
+    			flippedData = []
+
+    			for(h=12; h<24; h++){
+    				flippedData.push(filteredData[h]);
+    			}
+    			for(h=0; h<12; h++){
+    				flippedData.push(filteredData[h]);
+    			}
 
     			if(graphSide === "left"){
-    				loadGraph(filteredData, leftScaleGroup, canvasLeft,"left", maxDataReading);
+    				loadGraph(flippedData, leftScaleGroup, canvasLeft,"left", maxDataReading);
     			}
     			if(graphSide === "right"){
-    				loadGraph(filteredData, rightScaleGroup, canvasRight, "right", maxDataReading);
+    				loadGraph(flippedData, rightScaleGroup, canvasRight, "right", maxDataReading);
     			}
 			});	
 		}
