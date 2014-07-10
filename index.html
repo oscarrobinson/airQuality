@@ -259,6 +259,8 @@
 
 		var graphData = []
 
+		var animationSpeed = 1000;
+
 		// SEGMENTS
 		var loadGraph = function(graphData, scaleGroup, canvas,side, scaleMax){
 
@@ -283,7 +285,6 @@
 			var scaleCeil = Math.ceil(maxReading/50)*50;
 
 			//console.log(scaleCeil);
-
 			// color scale
 			var color = d3.scale.linear()
 				.domain([0, scaleCeil])
@@ -319,7 +320,7 @@
 
 			var circleAttr = circles
 				.transition()
-				.duration(500)
+				.duration(animationSpeed)
 				.attr("cx", cx)
 				.attr("cy", cy)
 				.attr("r",  function (d) { return 20 + scale(d); })
@@ -441,7 +442,7 @@
 
 			g_path
 				.transition()
-				.duration(500)
+				.duration(animationSpeed)
 			    .attr('d', arc)
 			    .attr('stroke', 'white')
 			    .attr('stroke-width', '1')
@@ -470,7 +471,7 @@
 
 			g_text
 				.transition()
-				.duration(500)
+				.duration(animationSpeed)
 			    .attr('text-anchor', 'middle')
 			    .attr('font-size', '9px')
 			    .attr('font-weight', 'bold')
