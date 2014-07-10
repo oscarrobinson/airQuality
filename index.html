@@ -355,8 +355,33 @@
 				.attr("cy", cy)
 				.attr("r",  function (d) { return 20 + scale(d); })
 				.attr("fill", "none")
-				.attr("stroke", "#444444")
-				.attr("stroke-dasharray", "1,4");
+				.attr("stroke", function(d) {
+					console.log(d);
+					if(d==200){
+						return "red";
+					}
+					else{
+						return "#444444";
+					}
+				})
+				.attr("stroke-dasharray", function(d){
+					console.log(d);
+					if(d==200){
+						return "3,3";
+					}
+					else{
+						return "1,4";
+					}
+				})
+				.attr("stroke-width", function(d){
+					if(d==200){
+						return "2";
+					}
+					else{
+						return "1";
+					}
+				})
+				.attr("opacity", 0.5);
 
 			// time labels
 			var labelData = [ 
