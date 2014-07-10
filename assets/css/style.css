@@ -155,25 +155,18 @@ svg{
 
 #time-controls{
 	margin-top:20px;
-	width:768px;
-	margin-left:auto;
-	margin-right:auto;
-	position:relative;
+	margin-left:345px;
+	position:fixed;
+
 }
 
 #day_select{
-	width:768px;
-	margin-left:auto;
-	margin-right:auto;
-	position: absolute;
 }
 
 #season_select{
-	width:768px;
-	margin-left:auto;
-	margin-right:auto;
-	margin:40px;
-	position:absolute;
+
+	margin-top:25px;
+	margin-left: 60px;
 }
 #time-controls  ul{
 	list-style-type: none;
