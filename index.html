@@ -80,14 +80,6 @@
 			<div id="site2">
 				<div class="locationSwitch">
 					<div class="liquid-slider" id="siteSliderRight">
-						<div id="eriLoc">
-							<div class="locationCode" id="ERI"></div>
-							<h2>Bexley - Erith</h2>
-							<div id="trafficWrapper1r"></div>
-							<script>
-								loadTraffic(eriTraffic, 1, "r");
-							</script>
-						</div>
 						<div id="briLoc">
 							<div class="locationCode" id="BRI"></div>
 							<h2>Lambeth - Brixton</h2>
@@ -120,6 +112,15 @@
 								loadTraffic(oxTraffic, 5, "r");			
 							</script>
 						</div>
+						<div id="eriLoc">
+							<div class="locationCode" id="ERI"></div>
+							<h2>Bexley - Erith</h2>
+							<div id="trafficWrapper1r"></div>
+							<script>
+								loadTraffic(eriTraffic, 1, "r");
+							</script>
+						</div>
+
 					</div>
 				</div>
 				<div id="right-graph-container">
@@ -167,14 +168,14 @@
 
 			var rowElement = document.getElementById("row");
 			rowElement.style.height = rowHeight;
-			console.log(rowElement);
+			//console.log(rowElement);
 
 
 			var colWidth = $("#site1").width();
-			console.log(colWidth);
+			//console.log(colWidth);
 
 			var panelWidth = $("#firstSlide").width();
-			console.log(panelWidth);
+			//console.log(panelWidth);
 
 
 		</script>
@@ -182,12 +183,16 @@
 		<script src="http:////cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.js"></script>
 		<script src="ls/js/jquery.liquid-slider.min.js"></script>
 		<script>
+		var sideClicked = "";
+
 		$(function(){
 		     $('#siteSliderLeft').liquidSlider({
+		     	//continuous:false,
 		     	hoverArrows: false,
+		     	preLoader:false,
 		     	slideEaseDuration: 300,
 		     	callback: function(){
-
+		     		sideClicked = "left";
 		     		setCurrentLocations();
 		     	}
 				
@@ -196,9 +201,12 @@
 
 		$(function(){
 		     $('#siteSliderRight').liquidSlider({
+		     	//continuous:false,
 		     	hoverArrows: false,
+		     	preLoader:false,
 		     	slideEaseDuration: 300,
 		     	callback: function(){
+		     		sideClicked = "right";
 		     		setCurrentLocations();
 		     	}
 		     });
@@ -206,16 +214,28 @@
 
 		$("#infoEri").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 
-		var currentLocationLeft = "ERI";
+		//Current location right is actually current location left <@:^)
+		var currentLocationLeft = "BRI";
 		var currentLocationRight = "ERI";
 
 
 		function setCurrentLocations(){
 			var s1 = $("#site1").find( "#siteSliderLeft .currentPanel").find(".panel-wrapper").find(".locationCode");
 			var s2 = $("#site2").find( "#siteSliderRight .currentPanel").find(".panel-wrapper").find(".locationCode");
-			currentLocationRight = $(s1).closest(".locationCode").attr("id");
-			currentLocationLeft = $(s2).closest(".locationCode").attr("id");
-			console.log(currentLocationRight);
+			var newS1 = $(s1).closest(".locationCode").attr("id");
+			var newS2 = $(s2).closest(".locationCode").attr("id");
+			if (newS1 === currentLocationRight && newS2 === currentLocationLeft){
+				console.log(sideClicked);
+				if(sideClicked==="left"){
+					newS1="ERI";
+				}
+				else if(sideClicked==="right"){
+					newS2="BRI";
+				}
+			}
+			currentLocationRight = newS1;
+			currentLocationLeft = newS2;
+			console.log("RIGHT LOCATION: "+currentLocationLeft+" || LEFT LOCATION: "+currentLocationRight);
 			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),currentLocationLeft, "left");
 
 			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
@@ -598,7 +618,7 @@
 		function getDataForSeasonAndDay(season, day, location, graphSide){
 			$.getJSON('data/data.json', function(data) {         
     			var dataForSeason = data[location][season];
-    			console.log(dataForSeason);
+    			//console.log(dataForSeason);
     			//console.log(maxDataReading);
     			//console.log(dataForSeason);
     			var filteredData = getDataForDayInSeason(dataForSeason,day);
