@@ -66,6 +66,14 @@
 			<div id="site2">
 				<div class="locationSwitch">
 					<div class="liquid-slider" id="siteSliderRight">
+						<div id="oxLoc">
+							<div class="locationCode" id="WM6"></div>
+							<h2 class="title">Oxford Street near Selfridges</h2>
+							<div id="trafficWrapper5r"></div>
+							<script>
+								loadTraffic(oxTraffic, 5, "r");			
+							</script>
+						</div>
 						<div id="briLoc">
 							<div class="locationCode" id="BRI"></div>
 							<h2 class="title">Brixton Road near Brixton Station</h2>
@@ -88,14 +96,6 @@
 							<div id="trafficWrapper4r"></div>
 							<script>
 								loadTraffic(ricTraffic, 4, "r");			
-							</script>
-						</div>
-						<div id="oxLoc">
-							<div class="locationCode" id="WM6"></div>
-							<h2 class="title">Oxford Street near Selfridges</h2>
-							<div id="trafficWrapper5r"></div>
-							<script>
-								loadTraffic(oxTraffic, 5, "r");			
 							</script>
 						</div>
 
@@ -198,8 +198,8 @@
 		$("#infoEri").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 
 		//Current location right is actually current location left <@:^)
-		var currentLocationLeft = "BRI";
-		var currentLocationRight = "ERI";
+		var currentLocationLeft = "WM6";
+		var currentLocationRight = "BRI";
 
 
 		function setCurrentLocations(){
