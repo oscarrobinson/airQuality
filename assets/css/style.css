@@ -67,6 +67,11 @@ p {
 
 .trafficWrapper {
 	padding: 10px;
+
+}
+
+.traffic-graph {
+	padding-top:20px;
 }
 
 .iconStrip {
