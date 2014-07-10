@@ -132,9 +132,9 @@
 		</div>
 		<div id="controls">
 			<div id="time-controls">
-			<div id="day_select" class="pure-menu pure-menu-open pure-menu-horizontal">
+			<div id="day_select" class="menu">
 			    <ul>
-			        <li class="pure-menu-selected"><a href="#">Mon</a></li>
+			        <li class="selected"><a href="#">Mon</a></li>
 			        <li><a href="#">Tue</a></li>
 			        <li><a href="#">Wed</a></li>
 			        <li><a href="#">Thu</a></li>
@@ -143,9 +143,9 @@
 			         <li><a href="#">Sun</a></li>
 			    </ul>
 			</div>
-			<div id="season_select" class="pure-menu pure-menu-open pure-menu-horizontal">
+			<div id="season_select" class="menu">
 			    <ul>
-			        <li class="pure-menu-selected"><a href="#">Spring</a></li>
+			        <li class="selected"><a href="#">Spring</a></li>
 			        <li><a href="#">Summer</a></li>
 			        <li><a href="#">Autumn</a></li>
 			        <li><a href="#">Winter</a></li>
@@ -190,7 +190,7 @@
 		     	//continuous:false,
 		     	hoverArrows: false,
 		     	preLoader:false,
-		     	slideEaseDuration: 300,
+		     	slideEaseDuration: 100,
 		     	callback: function(){
 		     		sideClicked = "left";
 		     		setCurrentLocations();
@@ -204,7 +204,10 @@
 		     	//continuous:false,
 		     	hoverArrows: false,
 		     	preLoader:false,
-		     	slideEaseDuration: 300,
+		     	slideEaseDuration: 100,
+		     	//dynamicArrowsGraphical:false,
+		     	//dynamicArrowLeftText: " << ",
+		     	//dynamicArrowRightText: " >>",
 		     	callback: function(){
 		     		sideClicked = "right";
 		     		setCurrentLocations();
@@ -236,9 +239,9 @@
 			currentLocationRight = newS1;
 			currentLocationLeft = newS2;
 			console.log("RIGHT LOCATION: "+currentLocationLeft+" || LEFT LOCATION: "+currentLocationRight);
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),currentLocationLeft, "left");
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),currentLocationLeft, "left");
 
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),
 				currentLocationRight, "right");
 
 		}
@@ -492,24 +495,24 @@
 
 
 		$( "#season_select li" ).click(function() {
-			$("#season_select li").removeClass("pure-menu-selected");
-			$(this).addClass("pure-menu-selected");
+			$("#season_select li").removeClass("selected");
+			$(this).addClass("selected");
 			var season = $(this).text();
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),
 				currentLocationLeft, "left");
 
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),
 				currentLocationRight, "right");
 		});
 
 		$( "#day_select li" ).click(function() {
-			$("#day_select li").removeClass("pure-menu-selected");
-			$(this).addClass("pure-menu-selected");
+			$("#day_select li").removeClass("selected");
+			$(this).addClass("selected");
 			var day = $(this).text();
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),
 				currentLocationLeft, "left");
 
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),
 				currentLocationRight, "right");
 		});
 
@@ -646,9 +649,9 @@
 
 
 
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),currentLocationLeft, "left");
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),currentLocationLeft, "left");
 
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),
 				currentLocationRight, "right");
 
 		</script>
