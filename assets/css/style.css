@@ -152,6 +152,7 @@ p {
 	width:384px;
 	margin-left:20px;
 	margin-top: 30px;
+	-webkit-transform: translateZ(0);
 }
 
 svg{
