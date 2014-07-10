@@ -129,18 +129,27 @@ p {
 }
 
 #left-graph-container{
+	position:absolute;
 	height: 626px;
 	width:384px;
 	margin: 0 auto;
 }
 
 #right-graph-container{
+	position:absolute;
 	height: 626px;
 	width:384px;
 	margin: 0 auto;
 }
 
 .canvas{
+	position:absolute;
+	width:384px;
+	margin-left:20px;
+	margin-top: 30px;
+}
+
+svg{
 	margin: 0 auto;
 }
 
