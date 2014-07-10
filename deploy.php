@@ -1,50 +1,20 @@
-<?php
-	/**
-	 * GIT DEPLOYMENT SCRIPT
-	 *
-	 * Used for automatically deploying websites via github or bitbucket, more deets here:
-	 *
-	 *		https://gist.github.com/1809044
-	 */
- 
-	// The commands
-	$commands = array(
-		'echo $PWD',
-		'whoami',
-		'git pull',
-		'git status',
-		'git submodule sync',
-		'git submodule update',
-		'git submodule status',
-	);
- 
-	// Run the commands for output
-	$output = '';
-	foreach($commands AS $command){
-		// Run it
-		$tmp = shell_exec($command);
-		// Output
-		$output .= "<span style=\"color: #6BE234;\">\$</span> <span style=\"color: #729FCF;\">{$command}\n</span>";
-		$output .= htmlentities(trim($tmp)) . "\n";
-	}
- 
-	// Make it pretty for manual user access (and why not?)
+<?php 
+try
+{
+  $payload = json_decode($_REQUEST['payload']);
+}
+catch(Exception $e)
+{
+  exit(0);
+}
+
+//log the request
+//file_put_contents('logs/github.txt', print_r($payload, TRUE), FILE_APPEND);
+
+
+if ($payload->ref === 'refs/heads/master')
+{
+  // path to your site deployment script
+  exec('git pull origin master');
+}
 ?>
-<!DOCTYPE HTML>
-<html lang="en-US">
-<head>
-	<meta charset="UTF-8">
-	<title>GIT DEPLOYMENT SCRIPT</title>
-</head>
-<body style="background-color: #000000; color: #FFFFFF; font-weight: bold; padding: 0 10px;">
-<pre>
- .  ____  .    ____________________________
- |/      \|   |                            |
-[| <span style="color: #FF0000;">&hearts;    &hearts;</span> |]  | Git Deployment Script v0.1 |
- |___==___|  /              &copy; oodavid 2012 |
-              |____________________________|
- 
-<?php echo $output; ?>
-</pre>
-</body>
-</html>
