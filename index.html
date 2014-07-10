@@ -244,23 +244,23 @@
 		}
 
 
-			var width = 370;
-			var height = 370;
+			var width = 350;
+			var height = 350;
+			var horPadding = 34;
 			var verPadding = 110;
-			var horPadding = 110;
 			var maxRadius = (width / 2) - 10;
 			// dynamic center
-			var cx = (width / 2) + verPadding;
-			var cy = (height / 2) + horPadding;
+			var cx = (width / 2) + horPadding;
+			var cy = (height / 2) + verPadding;
 			// max shape space
 
 			var  canvasLeft = d3.select('#canvasLeft').append('svg')
-			    .attr('width', width + (2 * verPadding))
-			    .attr('height', height + (2 * horPadding));
+			    .attr('width', width + (2 * horPadding))
+			    .attr('height', height + (2 * verPadding));
 
 			var canvasRight = d3.select('#canvasRight').append('svg')
-			    .attr('width', width + (2 * verPadding))
-			    .attr('height', height + (2 * horPadding));
+			    .attr('width', width + (2 * horPadding))
+			    .attr('height', height + (2 * verPadding));
 
 
 		var pie = d3.layout.pie()

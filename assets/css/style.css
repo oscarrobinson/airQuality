@@ -130,10 +130,14 @@ p {
 
 #left-graph-container{
 	height: 626px;
+	width:384px;
+	margin: 0 auto;
 }
 
 #right-graph-container{
 	height: 626px;
+	width:384px;
+	margin: 0 auto;
 }
 
 .canvas{
