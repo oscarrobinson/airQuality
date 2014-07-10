@@ -67,6 +67,11 @@ p {
 
 .trafficWrapper {
 	padding: 10px;
+
+}
+
+.traffic-graph {
+	padding-top:20px;
 }
 
 .iconStrip {
@@ -153,17 +158,80 @@ p {
 }
 
 #left-graph-container{
+	position:absolute;
 	height: 626px;
+	width:384px;
+	margin: 0 auto;
 }
 
 #right-graph-container{
+	position:absolute;
 	height: 626px;
+	width:384px;
+	margin: 0 auto;
+}
+
+.canvas{
+	position:absolute;
+	width:384px;
+	margin-left:20px;
+	margin-top: 30px;
+	-webkit-transform: translateZ(0);
+}
+
+svg{
+	margin: 0 auto;
 }
 
 #time-controls{
-	margin-top:10px;
-	width:500px;
-	margin-left:auto;
-	margin-right:auto;
+	margin-top:20px;
+	margin-left:230px;
+	position:fixed;
+
 }
+
+#day_select{
+}
+
+#season_select{
+
+	margin-top:25px;
+	margin-left: 60px;
+}
+#time-controls  ul{
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+	
+}
+
+#time-controls li {
+    display: inline;
+    background-color:white;
+    margin:10px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:5px;
+    padding-bottom: 5px;
+     border: 2px ;
+    border-radius: 10px;
+
+}
+
+#time-controls li.selected {
+    background-color:gray;
+
+
+}
+
+#time-controls a {
+	text-decoration:none;
+	color:black;
+    
+}
+
+.title{
+	display:none;
+}
+
 

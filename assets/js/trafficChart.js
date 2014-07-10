@@ -13,7 +13,6 @@ var widthScale = d3.scale.linear()
 	.domain([0, 35000])
 	.range([0, 340]);
 
-var colorScale = d3.scale.category10();
 
 
 var loadTraffic = function(data, id, side) {
@@ -34,8 +33,12 @@ var loadTraffic = function(data, id, side) {
 			.attr("y", function(d, i) {
 				return i * 15;
 			})
-			.attr("fill", function(d) {
-				return colorScale(d);
+			.attr("fill", function(d,i) {
+				if(i == 0) return "#A6242E";
+				if(i == 1) return "#D37881";
+				if(i == 2) return "#CCCDBB";
+				if(i == 3) return "#8A794E";
+				if(i == 4) return "#382C14";
 			});
 
 	var texts = canvas.selectAll("text")

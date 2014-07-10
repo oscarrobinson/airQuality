@@ -21,49 +21,35 @@
 			<div id="site1">
 				<div class="locationSwitch">
 					<div class="liquid-slider" id="siteSliderLeft">
-						<div id="eriLoc">
-							<div class="locationCode" id="ERI"></div>
-							<h2>Bexley - Erith</h2>
-							
-							<div class="iconStrip">
-								<a id="infoEri" name="testModal" href="#testModal"><img src="assets/glyphs/circle_info.png" height="32" ></a>
-								<a href="#"><img src="assets/glyphs/gm2.png" height="25"  ></a>
-								<a href="#"><img src="assets/glyphs/sv2.png" height="25" ></a>
-							</div>
-							
-							<div id="trafficWrapper1l"></div>
-							<script>
-								loadTraffic(eriTraffic, 1, "l");
-							</script>
-						</div>
+
 						<div id="briLoc">
 							<div class="locationCode" id="BRI"></div>
-							<h2>Lambeth - Brixton</h2>
-							<div id="trafficWrapper2l"></div>
+							<h2 class="title">Brixton Road near Brixton Station</h2>
+							<div id="trafficWrapper2l" class="traffic-graph"></div>
 							<script>
 								loadTraffic(briTraffic, 2, "l");			
 							</script>
 						</div>
 						<div id="horLoc">
 							<div class="locationCode" id="HOR"></div>
-							<h2>Westminster - Horseferry</h2>
-							<div id="trafficWrapper3l"></div>
+							<h2 class="title">Regency Place in Westminster</h2>
+							<div id="trafficWrapper3l" class="traffic-graph"></div>
 							<script>
 								loadTraffic(horTraffic, 3, "l");			
 							</script>
 						</div>
 						<div id="ricLoc">
 							<div class="locationCode" id="RIC"></div>
-							<h2>Richmond - Ntl Physical Lab</h2>
-							<div id="trafficWrapper4l"></div>
+							<h2 class="title">Bushy Park in Richmond</h2>
+							<div id="trafficWrapper4l" class="traffic-graph"></div>
 							<script>
 								loadTraffic(ricTraffic, 4, "l");			
 							</script>
 						</div>
 						<div id="oxLoc">
 							<div class="locationCode" id="WM6"></div>
-							<h2>Westminster - Oxford Street</h2>
-							<div id="trafficWrapper5l"></div>
+							<h2 class="title">Oxford Street near Selfridges</h2>
+							<div id="trafficWrapper5l" class="traffic-graph"></div>
 							<script>
 								loadTraffic(oxTraffic, 5, "l");			
 							</script>
@@ -80,46 +66,39 @@
 			<div id="site2">
 				<div class="locationSwitch">
 					<div class="liquid-slider" id="siteSliderRight">
-						<div id="eriLoc">
-							<div class="locationCode" id="ERI"></div>
-							<h2>Bexley - Erith</h2>
-							<div id="trafficWrapper1r"></div>
+						<div id="oxLoc">
+							<div class="locationCode" id="WM6"></div>
+							<h2 class="title">Oxford Street near Selfridges</h2>
+							<div id="trafficWrapper5r" class="traffic-graph"></div>
 							<script>
-								loadTraffic(eriTraffic, 1, "r");
+								loadTraffic(oxTraffic, 5, "r");			
 							</script>
 						</div>
 						<div id="briLoc">
 							<div class="locationCode" id="BRI"></div>
-							<h2>Lambeth - Brixton</h2>
-							<div id="trafficWrapper2r"></div>
+							<h2 class="title">Brixton Road near Brixton Station</h2>
+							<div id="trafficWrapper2r" class="traffic-graph"></div>
 							<script>
 								loadTraffic(briTraffic, 2, "r");			
 							</script>
 						</div>
 						<div id="horLoc">
 							<div class="locationCode" id="HOR"></div>
-							<h2>Westminster - Horseferry</h2>
-							<div id="trafficWrapper3r"></div>
+							<h2 class="title">Regency Place in Westminster</h2>
+							<div id="trafficWrapper3r" class="traffic-graph"></div>
 							<script>
 								loadTraffic(horTraffic, 3, "r");			
 							</script>
 						</div>
 						<div id="ricLoc">
 							<div class="locationCode" id="RIC"></div>
-							<h2>Richmond - Ntl Physical Lab</h2>
-							<div id="trafficWrapper4r"></div>
+							<h2 class="title">Bushy Park in Richmond</h2>
+							<div id="trafficWrapper4r" class="traffic-graph"></div>
 							<script>
 								loadTraffic(ricTraffic, 4, "r");			
 							</script>
 						</div>
-						<div id="oxLoc">
-							<div class="locationCode" id="WM6"></div>
-							<h2>Westminster - Oxford Street</h2>
-							<div id="trafficWrapper5r"></div>
-							<script>
-								loadTraffic(oxTraffic, 5, "r");			
-							</script>
-						</div>
+
 					</div>
 				</div>
 				<div id="right-graph-container">
@@ -131,9 +110,9 @@
 		</div>
 		<div id="controls">
 			<div id="time-controls">
-			<div id="day_select" class="pure-menu pure-menu-open pure-menu-horizontal">
+			<div id="day_select" class="menu">
 			    <ul>
-			        <li class="pure-menu-selected"><a href="#">Mon</a></li>
+			        <li class="selected"><a href="#">Mon</a></li>
 			        <li><a href="#">Tue</a></li>
 			        <li><a href="#">Wed</a></li>
 			        <li><a href="#">Thu</a></li>
@@ -142,9 +121,9 @@
 			         <li><a href="#">Sun</a></li>
 			    </ul>
 			</div>
-			<div id="season_select" class="pure-menu pure-menu-open pure-menu-horizontal">
+			<div id="season_select" class="menu">
 			    <ul>
-			        <li class="pure-menu-selected"><a href="#">Spring</a></li>
+			        <li class="selected"><a href="#">Spring</a></li>
 			        <li><a href="#">Summer</a></li>
 			        <li><a href="#">Autumn</a></li>
 			        <li><a href="#">Winter</a></li>
@@ -167,14 +146,14 @@
 
 			var rowElement = document.getElementById("row");
 			rowElement.style.height = rowHeight;
-			console.log(rowElement);
+			//console.log(rowElement);
 
 
 			var colWidth = $("#site1").width();
-			console.log(colWidth);
+			//console.log(colWidth);
 
 			var panelWidth = $("#firstSlide").width();
-			console.log(panelWidth);
+			//console.log(panelWidth);
 
 
 		</script>
@@ -182,12 +161,18 @@
 		<script src="http:////cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.js"></script>
 		<script src="ls/js/jquery.liquid-slider.min.js"></script>
 		<script>
+		var sideClicked = "";
+
 		$(function(){
 		     $('#siteSliderLeft').liquidSlider({
+		     	//continuous:false,
 		     	hoverArrows: false,
-		     	slideEaseDuration: 300,
+		     	preLoader:false,
+		     	slideEaseDuration: 100,
+		     	dynamicTabs:true,
+		     	includeTitle: true,
 		     	callback: function(){
-
+		     		sideClicked = "left";
 		     		setCurrentLocations();
 		     	}
 				
@@ -196,9 +181,15 @@
 
 		$(function(){
 		     $('#siteSliderRight').liquidSlider({
+		     	//continuous:false,
 		     	hoverArrows: false,
-		     	slideEaseDuration: 300,
+		     	preLoader:false,
+		     	slideEaseDuration: 100,
+		     	//dynamicArrowsGraphical:false,
+		     	//dynamicArrowLeftText: " << ",
+		     	//dynamicArrowRightText: " >>",
 		     	callback: function(){
+		     		sideClicked = "right";
 		     		setCurrentLocations();
 		     	}
 		     });
@@ -206,41 +197,45 @@
 
 		$("#infoEri").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 
-		var currentLocationLeft = "ERI";
-		var currentLocationRight = "ERI";
+		//Current location right is actually current location left <@:^)
+		var currentLocationLeft = "WM6";
+		var currentLocationRight = "BRI";
 
 
 		function setCurrentLocations(){
 			var s1 = $("#site1").find( "#siteSliderLeft .currentPanel").find(".panel-wrapper").find(".locationCode");
 			var s2 = $("#site2").find( "#siteSliderRight .currentPanel").find(".panel-wrapper").find(".locationCode");
-			currentLocationRight = $(s1).closest(".locationCode").attr("id");
-			currentLocationLeft = $(s2).closest(".locationCode").attr("id");
-			console.log(currentLocationRight);
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),currentLocationLeft, "left");
+			var newS1 = $(s1).closest(".locationCode").attr("id");
+			var newS2 = $(s2).closest(".locationCode").attr("id");
+			currentLocationRight = newS1;
+			currentLocationLeft = newS2;
+			console.log("RIGHT LOCATION: "+currentLocationLeft+" || LEFT LOCATION: "+currentLocationRight);
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),currentLocationLeft, "left");
 
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),
 				currentLocationRight, "right");
 
 		}
 
+			var canvasWidth = 384;
 
 			var width = 370;
 			var height = 370;
+			var horPadding = 34;
 			var verPadding = 110;
-			var horPadding = 110;
 			var maxRadius = (width / 2) - 10;
 			// dynamic center
-			var cx = (width / 2) + verPadding;
-			var cy = (height / 2) + horPadding;
+			var cx = (width / 2) + horPadding;
+			var cy = (height / 2) + verPadding;
 			// max shape space
 
 			var  canvasLeft = d3.select('#canvasLeft').append('svg')
-			    .attr('width', width + (2 * verPadding))
-			    .attr('height', height + (2 * horPadding));
+			    .attr('width', width + (2 * horPadding))
+			    .attr('height', height + (2 * verPadding));
 
 			var canvasRight = d3.select('#canvasRight').append('svg')
-			    .attr('width', width + (2 * verPadding))
-			    .attr('height', height + (2 * horPadding));
+			    .attr('width', width + (2 * horPadding))
+			    .attr('height', height + (2 * verPadding));
 
 
 		var pie = d3.layout.pie()
@@ -263,6 +258,8 @@
 							.attr("class", "scale_box_right")
 
 		var graphData = []
+
+		var animationSpeed = 500;
 
 		// SEGMENTS
 		var loadGraph = function(graphData, scaleGroup, canvas,side, scaleMax){
@@ -288,7 +285,6 @@
 			var scaleCeil = Math.ceil(maxReading/50)*50;
 
 			//console.log(scaleCeil);
-
 			// color scale
 			var color = d3.scale.linear()
 				.domain([0, scaleCeil])
@@ -324,13 +320,38 @@
 
 			var circleAttr = circles
 				.transition()
-				.duration(500)
+				.duration(animationSpeed)
 				.attr("cx", cx)
 				.attr("cy", cy)
 				.attr("r",  function (d) { return 20 + scale(d); })
 				.attr("fill", "none")
-				.attr("stroke", "#444444")
-				.attr("stroke-dasharray", "1,4");
+				.attr("stroke", function(d) {
+					console.log(d);
+					if(d==200){
+						return "black";
+					}
+					else{
+						return "#444444";
+					}
+				})
+				.attr("stroke-dasharray", function(d){
+					console.log(d);
+					if(d==200){
+						return "3,3";
+					}
+					else{
+						return "1,4";
+					}
+				})
+				.attr("stroke-width", function(d){
+					if(d==200){
+						return "2";
+					}
+					else{
+						return "1";
+					}
+				})
+				.attr("opacity", 0.5);
 
 			// time labels
 			var labelData = [ 
@@ -421,7 +442,7 @@
 
 			g_path
 				.transition()
-				.duration(500)
+				.duration(animationSpeed)
 			    .attr('d', arc)
 			    .attr('stroke', 'white')
 			    .attr('stroke-width', '1')
@@ -450,7 +471,7 @@
 
 			g_text
 				.transition()
-				.duration(500)
+				.duration(animationSpeed)
 			    .attr('text-anchor', 'middle')
 			    .attr('font-size', '9px')
 			    .attr('font-weight', 'bold')
@@ -471,24 +492,24 @@
 
 
 		$( "#season_select li" ).click(function() {
-			$("#season_select li").removeClass("pure-menu-selected");
-			$(this).addClass("pure-menu-selected");
+			$("#season_select li").removeClass("selected");
+			$(this).addClass("selected");
 			var season = $(this).text();
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),
 				currentLocationLeft, "left");
 
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),
 				currentLocationRight, "right");
 		});
 
 		$( "#day_select li" ).click(function() {
-			$("#day_select li").removeClass("pure-menu-selected");
-			$(this).addClass("pure-menu-selected");
+			$("#day_select li").removeClass("selected");
+			$(this).addClass("selected");
 			var day = $(this).text();
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),
 				currentLocationLeft, "left");
 
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),
 				currentLocationRight, "right");
 		});
 
@@ -598,7 +619,7 @@
 		function getDataForSeasonAndDay(season, day, location, graphSide){
 			$.getJSON('data/data.json', function(data) {         
     			var dataForSeason = data[location][season];
-    			console.log(dataForSeason);
+    			//console.log(dataForSeason);
     			//console.log(maxDataReading);
     			//console.log(dataForSeason);
     			var filteredData = getDataForDayInSeason(dataForSeason,day);
@@ -625,9 +646,9 @@
 
 
 
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),currentLocationLeft, "left");
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),currentLocationLeft, "left");
 
-			getDataForSeasonAndDay($('#season_select').find('.pure-menu-selected').text(), $('#day_select').find('.pure-menu-selected').text(),
+			getDataForSeasonAndDay($('#season_select').find('.selected').text(), $('#day_select').find('.selected').text(),
 				currentLocationRight, "right");
 
 		</script>
