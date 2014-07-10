@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>London Air Quality - Data Visualisation</title>
+		<link rel="stylesheet" href="assets/css/reset.css" type="text/css">
+		<!-- <link rel="stylesheet" href="ls/css/animate.css">  -->
+		<link rel="stylesheet" href="ls/css/liquid-slider.css">
+		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+		<link rel="stylesheet" href="assets/css/style.css" type="text/css">
+
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="assets/js/jquery.leanModal.min.js"></script>
+		<script src="assets/js/trafficChart.js"></script>
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	</head>
+	<body>
+			<div id="briLoc">
+				<div class="locationCode" id="BRI"></div>
+				<h2>Lambeth - Brixton</h2>
+				<div class="iconStrip">
+					<a href="#"><img src="assets/glyphs/circle_info.png" height="32"></a>
+					<a class="infoBox" id="mapBri" name="mapModal" href="#mapModal">
+						<img src="assets/glyphs/gm2.png" height="32" >
+					</a>
+					<a class="infoBox" id="streetBri" name="streetModal" href="#streetModal">
+						<img src="assets/glyphs/sv2.png" height="32" >
+					</a>
+				</div>
+				<div id="trafficWrapper2l"></div>
+				<script>
+					loadTraffic(briTraffic, 2, "l");			
+				</script>
+			</div>
+			<div id="horLoc">
+				<div class="locationCode" id="HOR"></div>
+				<h2>Westminster - Horseferry</h2>
+				<div class="iconStrip">
+					<a href="#"><img src="assets/glyphs/circle_info.png" height="32"></a>
+					<a class="infoBox" id="mapHor" name="mapModal" href="#mapModal"><img src="assets/glyphs/gm2.png" height="32" ></a>
+					
+					<a href="#"><img src="assets/glyphs/sv2.png" height="32" ></a>
+				</div>
+				<div id="trafficWrapper3l"></div>
+				<script>
+					loadTraffic(horTraffic, 3, "l");			
+				</script>
+			</div>
+			<div id="ricLoc">
+				<div class="locationCode" id="RIC"></div>
+				<h2>Richmond - Ntl Physical Lab</h2>
+				<div id="trafficWrapper4l"></div>
+				<script>
+					loadTraffic(ricTraffic, 4, "l");			
+				</script>
+			</div>
+			<div id="oxLoc">
+				<div class="locationCode" id="WM6"></div>
+				<h2>Westminster - Oxford Street</h2>
+				<div id="trafficWrapper5l"></div>
+				<script>
+					loadTraffic(oxTraffic, 5, "l");			
+				</script>
+			</div>
+		<div id="mapModal">
+			<a class="modal_close" href="#"></a>
+			<div id="map-canvas"></div>
+		</div>
+		<div id="streetModal">
+			<a class="modal_close" href="#"></a>
+			<div id="street-canvas"></div>
+		</div>
+		<script>
+			
+			// google maps script
+
+			function mapInitialize(myLat, myLng) {
+			  var myLatlng = new google.maps.LatLng(myLat,myLng);
+			  var mapOptions = {
+			    zoom: 16,
+			    center: myLatlng
+			  }
+			  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+			  var marker = new google.maps.Marker({
+			      position: myLatlng,
+			      map: map,
+			      title: 'Hello World!'
+			  });
+
+
+			  var getCen = map.getCenter();
+			  console.log(getCen);
+
+
+				google.maps.event.addDomListener(window, 'resize', function() {
+				map.setCenter(getCen);
+				});
+			}
+
+			google.maps.event.addDomListener(window, 'resize', function() {
+				mapInitialize();	
+			});
+			
+			// launch modal box with any class .infoBox
+
+			$(".infoBox").leanModal({ top : 100, overlay : 0.4, closeButton: ".modal_close"});
+
+			// initialise google map view for each location
+
+			$("#mapBri").on('click', function(){ mapInitialize(51.464981, -0.115699); });
+			$("#mapRic").on('click', function(){ mapInitialize(51.424715, -0.345447); });
+			$("#mapHor").on('click', function(){ mapInitialize(51.494803, -0.131965); });
+			$("#mapOx").on('click', function(){ mapInitialize(51.514304, -0.153283); });
+
+			// google street view script
+
+			function streetInitialize(myLat, myLng) {
+			  var myLatLng = new google.maps.LatLng(myLat, myLng);
+			  var panoramaOptions = {
+			    position: myLatLng,
+			    pov: {
+			      heading: 165,
+			      pitch: 0
+			    },
+			    zoom: 1
+			  };
+			  var myPano = new google.maps.StreetViewPanorama(
+			      document.getElementById('street-canvas'),
+			      panoramaOptions);
+			  myPano.setVisible(true);
+			}
+
+			google.maps.event.addDomListener(window, 'resize', function() {
+				streetInitialize();	
+			});
+
+			$("#streetBri").on('click', function(){ streetInitialize(51.464981, -0.115699); });
+			$("#streetRic").on('click', function(){ streetInitialize(51.424715, -0.345447); });
+			$("#streetHor").on('click', function(){ streetInitialize(51.494803, -0.131965); });
+			$("#streetOx").on('click', function(){ streetInitialize(51.514304, -0.153283); });
+
+
+		</script>
+	</body>
+</html>
