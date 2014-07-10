@@ -154,22 +154,22 @@ svg{
 }
 
 #time-controls{
-	margin-top:10px;
-	width:500px;
+	margin-top:20px;
+	width:768px;
 	margin-left:auto;
 	margin-right:auto;
 	position:relative;
 }
 
 #day_select{
-	width:400px;
+	width:768px;
 	margin-left:auto;
 	margin-right:auto;
 	position: absolute;
 }
 
 #season_select{
-	width:400px;
+	width:768px;
 	margin-left:auto;
 	margin-right:auto;
 	margin:40px;
@@ -186,7 +186,25 @@ svg{
     display: inline;
     background-color:white;
     margin:10px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:5px;
+    padding-bottom: 5px;
+     border: 2px ;
+    border-radius: 10px;
 
+}
+
+#time-controls li.selected {
+    background-color:gray;
+
+
+}
+
+#time-controls a {
+	text-decoration:none;
+	color:black;
+    
 }
 
 
