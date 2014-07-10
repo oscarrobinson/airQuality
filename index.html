@@ -23,7 +23,7 @@
 					<div class="liquid-slider" id="siteSliderLeft">
 						<div id="eriLoc">
 							<div class="locationCode" id="ERI"></div>
-							<h2>Bexley - Erith</h2>
+							<h2 class="title">Bexley - Erith</h2>
 							
 							<div class="iconStrip">
 								<a id="infoEri" name="testModal" href="#testModal"><img src="assets/glyphs/circle_info.png" height="32" ></a>
@@ -38,7 +38,7 @@
 						</div>
 						<div id="briLoc">
 							<div class="locationCode" id="BRI"></div>
-							<h2>Lambeth - Brixton</h2>
+							<h2 class="title">Lambeth - Brixton</h2>
 							<div id="trafficWrapper2l"></div>
 							<script>
 								loadTraffic(briTraffic, 2, "l");			
@@ -46,7 +46,7 @@
 						</div>
 						<div id="horLoc">
 							<div class="locationCode" id="HOR"></div>
-							<h2>Westminster - Horseferry</h2>
+							<h2 class="title">Westminster - Horseferry</h2>
 							<div id="trafficWrapper3l"></div>
 							<script>
 								loadTraffic(horTraffic, 3, "l");			
@@ -54,7 +54,7 @@
 						</div>
 						<div id="ricLoc">
 							<div class="locationCode" id="RIC"></div>
-							<h2>Richmond - Ntl Physical Lab</h2>
+							<h2 class="title">Richmond - Ntl Physical Lab</h2>
 							<div id="trafficWrapper4l"></div>
 							<script>
 								loadTraffic(ricTraffic, 4, "l");			
@@ -62,7 +62,7 @@
 						</div>
 						<div id="oxLoc">
 							<div class="locationCode" id="WM6"></div>
-							<h2>Westminster - Oxford Street</h2>
+							<h2 class="title">Westminster - Oxford Street</h2>
 							<div id="trafficWrapper5l"></div>
 							<script>
 								loadTraffic(oxTraffic, 5, "l");			
@@ -82,7 +82,7 @@
 					<div class="liquid-slider" id="siteSliderRight">
 						<div id="briLoc">
 							<div class="locationCode" id="BRI"></div>
-							<h2>Lambeth - Brixton</h2>
+							<h2 class="title">Lambeth - Brixton</h2>
 							<div id="trafficWrapper2r"></div>
 							<script>
 								loadTraffic(briTraffic, 2, "r");			
@@ -90,7 +90,7 @@
 						</div>
 						<div id="horLoc">
 							<div class="locationCode" id="HOR"></div>
-							<h2>Westminster - Horseferry</h2>
+							<h2 class="title">Westminster - Horseferry</h2>
 							<div id="trafficWrapper3r"></div>
 							<script>
 								loadTraffic(horTraffic, 3, "r");			
@@ -98,7 +98,7 @@
 						</div>
 						<div id="ricLoc">
 							<div class="locationCode" id="RIC"></div>
-							<h2>Richmond - Ntl Physical Lab</h2>
+							<h2 class="title">Richmond - Ntl Physical Lab</h2>
 							<div id="trafficWrapper4r"></div>
 							<script>
 								loadTraffic(ricTraffic, 4, "r");			
@@ -106,7 +106,7 @@
 						</div>
 						<div id="oxLoc">
 							<div class="locationCode" id="WM6"></div>
-							<h2>Westminster - Oxford Street</h2>
+							<h2 class="title">Westminster - Oxford Street</h2>
 							<div id="trafficWrapper5r"></div>
 							<script>
 								loadTraffic(oxTraffic, 5, "r");			
@@ -114,7 +114,7 @@
 						</div>
 						<div id="eriLoc">
 							<div class="locationCode" id="ERI"></div>
-							<h2>Bexley - Erith</h2>
+							<h2 class="title">Bexley - Erith</h2>
 							<div id="trafficWrapper1r"></div>
 							<script>
 								loadTraffic(eriTraffic, 1, "r");
@@ -191,6 +191,8 @@
 		     	hoverArrows: false,
 		     	preLoader:false,
 		     	slideEaseDuration: 100,
+		     	dynamicTabs:true,
+		     	includeTitle: true,
 		     	callback: function(){
 		     		sideClicked = "left";
 		     		setCurrentLocations();
