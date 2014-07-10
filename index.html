@@ -21,24 +21,10 @@
 			<div id="site1">
 				<div class="locationSwitch">
 					<div class="liquid-slider" id="siteSliderLeft">
-						<div id="eriLoc">
-							<div class="locationCode" id="ERI"></div>
-							<h2 class="title">Bexley - Erith</h2>
-							
-							<div class="iconStrip">
-								<a id="infoEri" name="testModal" href="#testModal"><img src="assets/glyphs/circle_info.png" height="32" ></a>
-								<a href="#"><img src="assets/glyphs/gm2.png" height="25"  ></a>
-								<a href="#"><img src="assets/glyphs/sv2.png" height="25" ></a>
-							</div>
-							
-							<div id="trafficWrapper1l"></div>
-							<script>
-								loadTraffic(eriTraffic, 1, "l");
-							</script>
-						</div>
+
 						<div id="briLoc">
 							<div class="locationCode" id="BRI"></div>
-							<h2 class="title">Lambeth - Brixton</h2>
+							<h2 class="title">Brixton Road near Brixton Station</h2>
 							<div id="trafficWrapper2l"></div>
 							<script>
 								loadTraffic(briTraffic, 2, "l");			
@@ -46,7 +32,7 @@
 						</div>
 						<div id="horLoc">
 							<div class="locationCode" id="HOR"></div>
-							<h2 class="title">Westminster - Horseferry</h2>
+							<h2 class="title">Regency Place in Westminster</h2>
 							<div id="trafficWrapper3l"></div>
 							<script>
 								loadTraffic(horTraffic, 3, "l");			
@@ -54,7 +40,7 @@
 						</div>
 						<div id="ricLoc">
 							<div class="locationCode" id="RIC"></div>
-							<h2 class="title">Richmond - Ntl Physical Lab</h2>
+							<h2 class="title">Bushy Park in Richmond</h2>
 							<div id="trafficWrapper4l"></div>
 							<script>
 								loadTraffic(ricTraffic, 4, "l");			
@@ -62,7 +48,7 @@
 						</div>
 						<div id="oxLoc">
 							<div class="locationCode" id="WM6"></div>
-							<h2 class="title">Westminster - Oxford Street</h2>
+							<h2 class="title">Oxford Street near Selfridges</h2>
 							<div id="trafficWrapper5l"></div>
 							<script>
 								loadTraffic(oxTraffic, 5, "l");			
@@ -82,7 +68,7 @@
 					<div class="liquid-slider" id="siteSliderRight">
 						<div id="briLoc">
 							<div class="locationCode" id="BRI"></div>
-							<h2 class="title">Lambeth - Brixton</h2>
+							<h2 class="title">Brixton Road near Brixton Station</h2>
 							<div id="trafficWrapper2r"></div>
 							<script>
 								loadTraffic(briTraffic, 2, "r");			
@@ -90,7 +76,7 @@
 						</div>
 						<div id="horLoc">
 							<div class="locationCode" id="HOR"></div>
-							<h2 class="title">Westminster - Horseferry</h2>
+							<h2 class="title">Regency Place in Westminster</h2>
 							<div id="trafficWrapper3r"></div>
 							<script>
 								loadTraffic(horTraffic, 3, "r");			
@@ -98,7 +84,7 @@
 						</div>
 						<div id="ricLoc">
 							<div class="locationCode" id="RIC"></div>
-							<h2 class="title">Richmond - Ntl Physical Lab</h2>
+							<h2 class="title">Bushy Park in Richmond</h2>
 							<div id="trafficWrapper4r"></div>
 							<script>
 								loadTraffic(ricTraffic, 4, "r");			
@@ -106,18 +92,10 @@
 						</div>
 						<div id="oxLoc">
 							<div class="locationCode" id="WM6"></div>
-							<h2 class="title">Westminster - Oxford Street</h2>
+							<h2 class="title">Oxford Street near Selfridges</h2>
 							<div id="trafficWrapper5r"></div>
 							<script>
 								loadTraffic(oxTraffic, 5, "r");			
-							</script>
-						</div>
-						<div id="eriLoc">
-							<div class="locationCode" id="ERI"></div>
-							<h2 class="title">Bexley - Erith</h2>
-							<div id="trafficWrapper1r"></div>
-							<script>
-								loadTraffic(eriTraffic, 1, "r");
 							</script>
 						</div>
 
@@ -229,15 +207,6 @@
 			var s2 = $("#site2").find( "#siteSliderRight .currentPanel").find(".panel-wrapper").find(".locationCode");
 			var newS1 = $(s1).closest(".locationCode").attr("id");
 			var newS2 = $(s2).closest(".locationCode").attr("id");
-			if (newS1 === currentLocationRight && newS2 === currentLocationLeft){
-				console.log(sideClicked);
-				if(sideClicked==="left"){
-					newS1="ERI";
-				}
-				else if(sideClicked==="right"){
-					newS2="BRI";
-				}
-			}
 			currentLocationRight = newS1;
 			currentLocationLeft = newS2;
 			console.log("RIGHT LOCATION: "+currentLocationLeft+" || LEFT LOCATION: "+currentLocationRight);
