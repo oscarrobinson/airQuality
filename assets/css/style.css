@@ -48,7 +48,7 @@
 }
 
 .panel-wrapper {
-	padding: 5px 35px !important;
+	padding: 5px 15px !important;
 }
 
 /* Font styles*/ 
@@ -72,12 +72,14 @@ p {
 
 .traffic-graph {
 	padding-top:20px;
+	float:left;
 }
 
 .iconStrip {
 	width: 33px;
 	padding: 5px;
-	float:right;
+	position: absolute;
+	right: 10px;
 }
 
 .iconStrip a {
@@ -312,6 +314,9 @@ svg{
 
 .rawFrame {
 	padding: 15px;
+	overflow: hidden;
+	height: 300px;
+	-webkit-overflow-scrolling:touch;
 }
 
 #fixed-info {
