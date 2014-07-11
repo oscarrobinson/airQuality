@@ -67,7 +67,7 @@ p {
 
 .trafficWrapper {
 	padding: 10px;
-
+	float: left;
 }
 
 .traffic-graph {
