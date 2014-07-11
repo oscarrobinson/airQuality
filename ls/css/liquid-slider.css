@@ -121,11 +121,13 @@
   appearance:none;
   background: transparent;
   padding: 5px;
-  font-size: 110%;
+  font-size: 11pt;
   border: none;
   height: 35px;
   cursor:pointer;
   outline: 0;
+  font-weight: bold;
+  padding-left: 20px;
 }
 
 /*** Arrow Navigation (non-graphical) ***/

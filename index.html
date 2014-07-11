@@ -109,6 +109,7 @@
 
 		</div>
 		<div id="controls">
+			<div id="fixed-info"><a class="infoBox" name="fixed-info-modal-open" href="#fixed-info-modal"><img src="assets/glyphs/circle_info.png" alt="Information"></a></div>
 			<div id="time-controls">
 			<div id="day_select" class="menu">
 			    <ul>
@@ -130,6 +131,13 @@
 			    </ul>
 			</div>
 			</div>
+		</div>
+
+		<!--- MODALS -->
+		<div id="fixed-info-modal">
+			<a class="modal_close" href="#"></a>
+			<h3>Data Information</h3>
+			<!-- <iframe src="data/data.json" width="300" height="300"></iframe> -->
 		</div>
 		<script>
 
@@ -157,6 +165,15 @@
 		<script src="http:////cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.js"></script>
 		<script src="ls/js/jquery.liquid-slider.min.js"></script>
 		<script>
+		//MODALS////////
+
+		$(".infoBox").leanModal({ top : 37, overlay : 0.4, closeButton: ".modal_close"});
+
+
+		//////////////////
+
+
+
 		var sideClicked = "";
 
 		$(function(){
