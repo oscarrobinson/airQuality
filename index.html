@@ -354,24 +354,35 @@
 
 		// initialise google map view for each location
 
-		$("#mapBri").on('click', function(){ mapInitialize(51.464981, -0.115699); });
+		$("#mapBri").on('click', function(){ mapInitialize(51.464047, -0.114523); });
 		$("#mapRic").on('click', function(){ mapInitialize(51.424715, -0.345447); });
 		$("#mapHor").on('click', function(){ mapInitialize(51.494803, -0.131965); });
-		$("#mapOx").on('click', function(){ mapInitialize(51.514304, -0.153283); });
+		$("#mapOx").on('click', function(){ mapInitialize(51.514030, -0.152629); });
 
-		$("#mapBri2").on('click', function(){ mapInitialize(51.464981, -0.115699); });
+		$("#mapBri2").on('click', function(){ mapInitialize(51.464047, -0.114523); });
 		$("#mapRic2").on('click', function(){ mapInitialize(51.424715, -0.345447); });
 		$("#mapHor2").on('click', function(){ mapInitialize(51.494803, -0.131965); });
-		$("#mapOx2").on('click', function(){ mapInitialize(51.514304, -0.153283); });
+		$("#mapOx2").on('click', function(){ mapInitialize(51.514030, -0.152629); });
 
 		// google street view script
 
 		function streetInitialize(myLat, myLng) {
 		  var myLatLng = new google.maps.LatLng(myLat, myLng);
+
+		  	if (myLat == 51.464047) {
+		  		var heading = 354;
+		  	}
+		  	else if (myLat == 51.514030) {
+		  		var heading = 83;
+		  	}
+		  	else {
+		  		var heading = 165;
+		  	}
+
 		  var panoramaOptions = {
 		    position: myLatLng,
 		    pov: {
-		      heading: 165,
+		      heading: heading,
 		      pitch: 0
 		    },
 		    zoom: 1
@@ -386,15 +397,15 @@
 			streetInitialize();	
 		});
 
-		$("#streetBri").on('click', function(){ streetInitialize(51.464981, -0.115699); });
+		$("#streetBri").on('click', function(){ streetInitialize(51.464047, -0.114523); });
 		$("#streetRic").on('click', function(){ streetInitialize(51.424715, -0.345447); });
 		$("#streetHor").on('click', function(){ streetInitialize(51.494803, -0.131965); });
-		$("#streetOx").on('click', function(){ streetInitialize(51.514304, -0.153283); });
+		$("#streetOx").on('click', function(){ streetInitialize(51.514030, -0.152629); });
 
-		$("#streetBri2").on('click', function(){ streetInitialize(51.464981, -0.115699); });
+		$("#streetBri2").on('click', function(){ streetInitialize(51.464047, -0.114523); });
 		$("#streetRic2").on('click', function(){ streetInitialize(51.424715, -0.345447); });
 		$("#streetHor2").on('click', function(){ streetInitialize(51.494803, -0.131965); });
-		$("#streetOx2").on('click', function(){ streetInitialize(51.514304, -0.153283); });
+		$("#streetOx2").on('click', function(){ streetInitialize(51.514030, -0.152629); });
 
 
 		//////////////////
