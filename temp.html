@@ -21,7 +21,9 @@
 				<div class="locationCode" id="BRI"></div>
 				<h2>Lambeth - Brixton</h2>
 				<div class="iconStrip">
-					<a href="#"><img src="assets/glyphs/circle_info.png" height="32"></a>
+					<a class="infoBox" name="briModal" href="#briModal">
+						<img src="assets/glyphs/circle_info.png" height="32">
+					</a>
 					<a class="infoBox" id="mapBri" name="mapModal" href="#mapModal">
 						<img src="assets/glyphs/gm2.png" height="32" >
 					</a>
@@ -38,10 +40,15 @@
 				<div class="locationCode" id="HOR"></div>
 				<h2>Westminster - Horseferry</h2>
 				<div class="iconStrip">
-					<a href="#"><img src="assets/glyphs/circle_info.png" height="32"></a>
-					<a class="infoBox" id="mapHor" name="mapModal" href="#mapModal"><img src="assets/glyphs/gm2.png" height="32" ></a>
-					
-					<a href="#"><img src="assets/glyphs/sv2.png" height="32" ></a>
+					<a href="#">
+						<img src="assets/glyphs/circle_info.png" height="32">
+					</a>
+					<a class="infoBox" id="mapHor" name="mapModal" href="#mapModal">
+						<img src="assets/glyphs/gm2.png" height="32" >
+					</a>
+					<a class="infoBox" id="streetHor" name="streetModal" href="#streetModal">
+						<img src="assets/glyphs/sv2.png" height="32" >
+					</a>
 				</div>
 				<div id="trafficWrapper3l"></div>
 				<script>
@@ -51,6 +58,17 @@
 			<div id="ricLoc">
 				<div class="locationCode" id="RIC"></div>
 				<h2>Richmond - Ntl Physical Lab</h2>
+				<div class="iconStrip">
+					<a href="#">
+						<img src="assets/glyphs/circle_info.png" height="32">
+					</a>
+					<a class="infoBox" id="mapRic" name="mapModal" href="#mapModal">
+						<img src="assets/glyphs/gm2.png" height="32" >
+					</a>
+					<a class="infoBox" id="streetRic" name="streetModal" href="#streetModal">
+						<img src="assets/glyphs/sv2.png" height="32" >
+					</a>
+				</div>
 				<div id="trafficWrapper4l"></div>
 				<script>
 					loadTraffic(ricTraffic, 4, "l");			
@@ -59,6 +77,17 @@
 			<div id="oxLoc">
 				<div class="locationCode" id="WM6"></div>
 				<h2>Westminster - Oxford Street</h2>
+				<div class="iconStrip">
+					<a href="#">
+						<img src="assets/glyphs/circle_info.png" height="32">
+					</a>
+					<a class="infoBox" id="mapOx" name="mapModal" href="#mapModal">
+						<img src="assets/glyphs/gm2.png" height="32" >
+					</a>
+					<a class="infoBox" id="streetOx" name="streetModal" href="#streetModal">
+						<img src="assets/glyphs/sv2.png" height="32" >
+					</a>
+				</div>
 				<div id="trafficWrapper5l"></div>
 				<script>
 					loadTraffic(oxTraffic, 5, "l");			
@@ -72,6 +101,15 @@
 			<a class="modal_close" href="#"></a>
 			<div id="street-canvas"></div>
 		</div>
+		<div id="briModal">
+			<a class="modal_close" href="#"></a>
+			<h3>Brixton Road near Brixton Station</h3>
+			<p>Classification: Kerbside</p>
+			<p>Distance to Road: 1 metres</p>
+			<p>Sampling Height: 2 metres</p>
+			<!-- <iframe src="data/data.json" width="300" height="300"></iframe> -->
+		</div>
+
 		<script>
 			
 			// google maps script
