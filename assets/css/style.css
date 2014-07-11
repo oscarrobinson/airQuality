@@ -75,6 +75,7 @@ p {
 }
 
 .iconStrip {
+	width: 33px;
 	padding: 5px;
 	float:right;
 }
