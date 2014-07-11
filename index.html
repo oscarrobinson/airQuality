@@ -14,7 +14,7 @@
 		<script src="assets/js/trafficChart.js"></script>
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
-		
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 	</head>
 	<body>
 		<div id="row">
@@ -25,6 +25,17 @@
 						<div id="briLoc">
 							<div class="locationCode" id="BRI"></div>
 							<h2 class="title">Brixton Road near Brixton Station</h2>
+							<div class="iconStrip">
+								<a class="infoBox" name="briModal" href="#briModal">
+									<img src="assets/glyphs/circle_info.png" height="32">
+								</a>
+								<a class="infoBox" id="mapBri" name="mapModal" href="#mapModal">
+									<img src="assets/glyphs/gm2.png" height="32" >
+								</a>
+								<a class="infoBox" id="streetBri" name="streetModal" href="#streetModal">
+									<img src="assets/glyphs/sv2.png" height="32" >
+								</a>
+							</div>
 							<div id="trafficWrapper2l" class="traffic-graph"></div>
 							<script>
 								loadTraffic(briTraffic, 2, "l");			
@@ -69,6 +80,7 @@
 						<div id="oxLoc">
 							<div class="locationCode" id="WM6"></div>
 							<h2 class="title">Oxford Street near Selfridges</h2>
+
 							<div id="trafficWrapper5r" class="traffic-graph"></div>
 							<script>
 								loadTraffic(oxTraffic, 5, "r");			
@@ -134,6 +146,54 @@
 		</div>
 
 		<!--- MODALS -->
+
+		<div id="mapModal">
+			<a class="modal_close" href="#"></a>
+			<div id="map-canvas"></div>
+		</div>
+		<div id="streetModal">
+			<a class="modal_close" href="#"></a>
+			<div id="street-canvas"></div>
+		</div>
+		<div id="briModal">
+			<a class="modal_close" href="#"></a>
+			<h3>Brixton Road near Brixton Station</h3>
+			<p><strong>Classification:</strong> Kerbside</p>
+			<p><strong>Distance to Road:</strong> 1 metres</p>
+			<p><strong>Sampling Height:</strong> 2 metres</p>
+			<p><strong>Example Data</strong></p>
+			<iframe class="rawFrame" src="data/example/bri.txt" width="300" height="300"></iframe>
+		</div>
+		<div id="horModal">
+			<a class="modal_close" href="#"></a>
+			<h3>Regency Place in Westminster</h3>
+			<p><strong>Classification:</strong> Urban Background</p>
+			<p><strong>Distance to Road:</strong> Not available</p>
+			<p><strong>Sampling Height:</strong> Not available</p>
+			<p><strong>Example Data</strong></p>
+			<iframe class="rawFrame" src="data/example/hor.txt" width="300" height="300"></iframe>
+		</div>
+		<div id="ricModal">
+			<a class="modal_close" href="#"></a>
+			<h3>Bushy Park in Richmond</h3>
+			<p><strong>Classification:</strong> Suburban</p>
+			<p><strong>Distance to Road:</strong> Not available</p>
+			<p><strong>Sampling Height:</strong> 20 metres</p>
+			<p><strong>Example Data</strong></p>
+			<iframe class="rawFrame" src="data/example/ric.txt" width="300" height="300"></iframe>
+		</div>
+		<div id="oxModal">
+			<a class="modal_close" href="#"></a>
+			<h3>Oxford Street near Selfridges</h3>
+			<p><strong>Classification:</strong> Kerbside</p>
+			<p><strong>Distance to Road:</strong> 1 metres</p>
+			<p><strong>Sampling Height:</strong> 1.5 metres</p>
+			<p><strong>Example Data</strong></p>
+			<iframe class="rawFrame" src="data/example/ox.txt" width="300" height="300"></iframe>
+		</div>
+
+
+
 		<div id="fixed-info-modal">
 			<a class="modal_close" href="#"></a>
 			<h3><b>Data Information</b></h3>
@@ -180,7 +240,75 @@
 		<script>
 		//MODALS////////
 
+
+		// launch modal box with any class .infoBox
+
 		$(".infoBox").leanModal({ top : 37, overlay : 0.4, closeButton: ".modal_close"});
+		
+		// google maps script
+
+		function mapInitialize(myLat, myLng) {
+		  var myLatlng = new google.maps.LatLng(myLat,myLng);
+		  var mapOptions = {
+		    zoom: 16,
+		    center: myLatlng
+		  }
+		  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+		  var marker = new google.maps.Marker({
+		      position: myLatlng,
+		      map: map,
+		      title: 'Hello World!'
+		  });
+
+
+		  var getCen = map.getCenter();
+		  console.log(getCen);
+
+
+			google.maps.event.addDomListener(window, 'resize', function() {
+			map.setCenter(getCen);
+			});
+		}
+
+		google.maps.event.addDomListener(window, 'resize', function() {
+			mapInitialize();	
+		});
+		
+
+		// initialise google map view for each location
+
+		$("#mapBri").on('click', function(){ mapInitialize(51.464981, -0.115699); });
+		$("#mapRic").on('click', function(){ mapInitialize(51.424715, -0.345447); });
+		$("#mapHor").on('click', function(){ mapInitialize(51.494803, -0.131965); });
+		$("#mapOx").on('click', function(){ mapInitialize(51.514304, -0.153283); });
+
+		// google street view script
+
+		function streetInitialize(myLat, myLng) {
+		  var myLatLng = new google.maps.LatLng(myLat, myLng);
+		  var panoramaOptions = {
+		    position: myLatLng,
+		    pov: {
+		      heading: 165,
+		      pitch: 0
+		    },
+		    zoom: 1
+		  };
+		  var myPano = new google.maps.StreetViewPanorama(
+		      document.getElementById('street-canvas'),
+		      panoramaOptions);
+		  myPano.setVisible(true);
+		}
+
+		google.maps.event.addDomListener(window, 'resize', function() {
+			streetInitialize();	
+		});
+
+		$("#streetBri").on('click', function(){ streetInitialize(51.464981, -0.115699); });
+		$("#streetRic").on('click', function(){ streetInitialize(51.424715, -0.345447); });
+		$("#streetHor").on('click', function(){ streetInitialize(51.494803, -0.131965); });
+		$("#streetOx").on('click', function(){ streetInitialize(51.514304, -0.153283); });
 
 
 		//////////////////
