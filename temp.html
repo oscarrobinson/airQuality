@@ -40,7 +40,7 @@
 				<div class="locationCode" id="HOR"></div>
 				<h2>Westminster - Horseferry</h2>
 				<div class="iconStrip">
-					<a href="#">
+					<a class="infoBox" name="horModal" href="#horModal">
 						<img src="assets/glyphs/circle_info.png" height="32">
 					</a>
 					<a class="infoBox" id="mapHor" name="mapModal" href="#mapModal">
@@ -59,7 +59,7 @@
 				<div class="locationCode" id="RIC"></div>
 				<h2>Richmond - Ntl Physical Lab</h2>
 				<div class="iconStrip">
-					<a href="#">
+					<a class="infoBox" name="ricModal" href="#ricModal">
 						<img src="assets/glyphs/circle_info.png" height="32">
 					</a>
 					<a class="infoBox" id="mapRic" name="mapModal" href="#mapModal">
@@ -78,7 +78,7 @@
 				<div class="locationCode" id="WM6"></div>
 				<h2>Westminster - Oxford Street</h2>
 				<div class="iconStrip">
-					<a href="#">
+					<a class="infoBox" name="oxModal" href="#oxModal">
 						<img src="assets/glyphs/circle_info.png" height="32">
 					</a>
 					<a class="infoBox" id="mapOx" name="mapModal" href="#mapModal">
@@ -104,10 +104,38 @@
 		<div id="briModal">
 			<a class="modal_close" href="#"></a>
 			<h3>Brixton Road near Brixton Station</h3>
-			<p>Classification: Kerbside</p>
-			<p>Distance to Road: 1 metres</p>
-			<p>Sampling Height: 2 metres</p>
-			<!-- <iframe src="data/data.json" width="300" height="300"></iframe> -->
+			<p><strong>Classification:</strong> Kerbside</p>
+			<p><strong>Distance to Road:</strong> 1 metres</p>
+			<p><strong>Sampling Height:</strong> 2 metres</p>
+			<p><strong>Example Data</strong></p>
+			<iframe class="rawFrame" src="data/example/bri.txt" width="300" height="300"></iframe>
+		</div>
+		<div id="horModal">
+			<a class="modal_close" href="#"></a>
+			<h3>Regency Place in Westminster</h3>
+			<p><strong>Classification:</strong> Urban Background</p>
+			<p><strong>Distance to Road:</strong> Not available</p>
+			<p><strong>Sampling Height:</strong> Not available</p>
+			<p><strong>Example Data</strong></p>
+			<iframe class="rawFrame" src="data/example/hor.txt" width="300" height="300"></iframe>
+		</div>
+		<div id="ricModal">
+			<a class="modal_close" href="#"></a>
+			<h3>Bushy Park in Richmond</h3>
+			<p><strong>Classification:</strong> Suburban</p>
+			<p><strong>Distance to Road:</strong> Not available</p>
+			<p><strong>Sampling Height:</strong> 20 metres</p>
+			<p><strong>Example Data</strong></p>
+			<iframe class="rawFrame" src="data/example/ric.txt" width="300" height="300"></iframe>
+		</div>
+		<div id="oxModal">
+			<a class="modal_close" href="#"></a>
+			<h3>Oxford Street near Selfridges</h3>
+			<p><strong>Classification:</strong> Kerbside</p>
+			<p><strong>Distance to Road:</strong> 1 metres</p>
+			<p><strong>Sampling Height:</strong> 1.5 metres</p>
+			<p><strong>Example Data</strong></p>
+			<iframe class="rawFrame" src="data/example/ox.txt" width="300" height="300"></iframe>
 		</div>
 
 		<script>
