@@ -4,9 +4,8 @@
 		<title>London Air Quality - Data Visualisation</title>
 		<link rel="stylesheet" href="assets/css/reset.css" type="text/css">
 		<!-- <link rel="stylesheet" href="ls/css/animate.css">  -->
-		<link rel="stylesheet" href="ls/css/liquid-slider.css">
+		<link rel="stylesheet" href="ls/css/liquid-slider-clean.css">
 		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-		<link rel="stylesheet" href="assets/css/style.css" type="text/css">
 
 		<script src="http://d3js.org/d3.v3.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -14,6 +13,9 @@
 		<script src="assets/js/trafficChart.js"></script>
 		<script src="http://d3js.org/topojson.v1.min.js"></script>
 		<script src="http://d3js.org/colorbrewer.v1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+		<script src="http:////cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.js"></script>
+		<script src="ls/js/jquery.liquid-slider.min.js"></script>
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<link href="apple-touch-icon.png" rel="apple-touch-icon" />
@@ -23,24 +25,31 @@
 
 
 		<style>
+
+	
 			path:hover{
 				fill-opacity: 0.5;
 			}
-			body{
-				background-color: white;
+
+			#viz{
+				width:100%;
+				height:100%;
+				min-height:600px;
+				margin-top:50px;
 			}
 
-			div.tooltip {         
-			  text-align: left;           
-			  width: 300px;                  
-			  height: 130px;                 
-			  padding: 5px;
-			  color:white;             
-			  font: 18px sans-serif;     
-			  background: black;   
-			  border: 0px;      
-			  border-radius: 8px;           
-			  pointer-events: none;         
+			#header{
+				height:70px;
+				background-color:gray;
+			}
+
+			.liquid-slider{
+				height:60px;
+				width:100%;
+			}
+
+			.selection{
+				width:200px;
 			}
 
 		</style>
@@ -48,12 +57,47 @@
 
 	</head>
 	<body>
+		<div id="header">
+			<div id="data-switch">
+				<div class="liquid-slider" id="data-select">
+					<div id="happiness" class="selection">
+						Happiness
+					</div>
+					<div id="trees"  class="selection">
+						Trees
+					</div>
+					<div id="toilets" class="selection">
+						Toilets
+					</div>
+					<div id="volunteering" class="selection">
+						Volunteering
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="row-fluid">
-		<div id="viz" class="span8">
+		<div id="viz">
 	<script>
 
-		var width = 1024;
-		var height = 768;
+		$(function(){
+		     $('#data-select').liquidSlider({
+		     	//continuous:false,
+		     	hoverArrows: false,
+		     	preLoader:false,
+		     	slideEaseDuration: 100,
+		     	dynamicTabs:true,
+		     	includeTitle: true,
+		     	callback: function(){
+		     		
+		     	}
+				
+		     });
+		});
+
+		var width = document.getElementById('viz').clientWidth;
+		var height = document.getElementById('viz').clientHeight;
+
+		console.log(width + "  " + height);
 
 		var div = d3.select("#stats").append("div")
 				    .attr("class", "tooltip")
