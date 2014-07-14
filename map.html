@@ -32,24 +32,44 @@
 			}
 
 			#viz{
-				width:100%;
+				width:700px;
 				height:100%;
 				min-height:600px;
-				margin-top:50px;
+				float:right;
 			}
 
 			#header{
-				height:70px;
+				height:100px;
 				background-color:gray;
 			}
 
 			.liquid-slider{
-				height:35px;
-				width:100%;
+				height:65px;
+			}
+
+			#data-switch{
+				width:50%;
+				height:100px;
 			}
 
 			.selection{
 				width:200px;
+			}
+
+			div.tooltip {         
+			  text-align: left;           
+			  width: 200px;                  
+			  height: 400px;                 
+			  padding: 5px;
+			  color:white;             
+			  font: 18px sans-serif;     
+			  background: gray;   
+			  border: 0px;      
+			  border-radius: 8px;           
+			  pointer-events: none;  
+			  float:left;
+			  margin-left:50px;
+			  margin-top: 60px;      
 			}
 
 		</style>
@@ -153,7 +173,7 @@
 			            var projection = d3.geo.mercator()
 			                .center([-0.10,51.5171])
 			                .rotate([0,0])
-			                .scale(50000)
+			                .scale(40000)
 			                .translate([width / 2, height / 2.3]);
 
 			            var path = d3.geo.path()
