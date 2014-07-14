@@ -41,15 +41,19 @@
 			#header{
 				height:100px;
 				background-color:gray;
+				/*margin:0px;*/
 			}
 
 			.liquid-slider{
 				height:65px;
+				margin:0px;
 			}
 
 			#data-switch{
 				width:50%;
 				height:100px;
+				margin:0;
+				overflow: auto;
 			}
 
 			.selection{
@@ -72,11 +76,22 @@
 			  margin-top: 60px;      
 			}
 
+			#scale{
+				width:50%;
+				height:100px;
+				float:right;
+				margin-top:-100px;
+			}
+			#scale svg {
+				padding:60px;
+				padding-top:20px;
+			}
+
 		</style>
 
 
 	</head>
-	<body>
+	<body id="body">
 		<div id="header">
 			<div id="data-switch">
 				<div class="liquid-slider" id="data-select">
@@ -94,10 +109,12 @@
 					</div>
 				</div>
 			</div>
+			<div id="scale">
+			</div>
 		</div>
 		<div class="row-fluid">
-		<div id="stats">
-		<div id="viz">
+		<div id="stats"></div>
+		<div id="viz"></div>
 	<script>
 
 		$(function(){
@@ -136,17 +153,48 @@
 
 		}
 
+
+		function getScaleColor(color, inc, num, scaleBlockNo){
+			var max = 0;
+			var min = 0;
+			if(num==0){
+				max = 8;
+				min = 7;
+			}
+			else if(num==1){
+				max = 40000;
+				min = 0;
+			}
+			else if(num==2){
+				max = 100;
+				min = 0;
+			}
+			else if(num==3){
+				min = 0;
+				max = 50;
+			}
+			console.log(inc+": "+min+" "+max);
+			console.log(inc+": "+(min+((max/10)*inc)));
+			return color(min+(((max-min)/scaleBlockNo)*inc));
+
+		}
+
 		var width = document.getElementById('viz').clientWidth;
 		var height = document.getElementById('viz').clientHeight;
+
+		var bodyWidth = document.getElementById('body').clientWidth;
 
 		console.log(width + "  " + height);
 
 		var div = d3.select("#stats").append("div")
 				    .attr("class", "tooltip")
 				    .attr("id", "stats")
-				    .style("opacity", 0.8);
+				    .style("opacity", 0.8)
+				    .html("<b>Touch a Borough to view its data</b>");
 
 		var svg = d3.select("#viz").append("svg:svg").attr("width", width).attr("height", height);
+
+		var svg_scale = d3.select('#scale').append("svg").attr("width", (bodyWidth/2)-120).attr("height", 80)
  		
 		var update = function(num){
 
@@ -178,6 +226,9 @@
 			    }
 
 			d3.json("statgeo.json", function(uk){
+
+						var dMax = 0;
+						var dMin = 0;
 
 						//Gets the coordinate data from our dataset.
 			            var subunits = topojson.feature(uk, uk.objects.thenewestdict1);
@@ -231,6 +282,79 @@
 						 			+ "Trees: " + d.properties.trees + "<br>"
 						 			+ "Volunteering: " + d.properties.volunteering+ "% <br>");
 						 	});
+
+
+						 	var scaleBlockNo = 30;
+
+						 	for(i=0; i<scaleBlockNo; i++){
+						 	svg_scale.append("rect")
+						 		.attr("height", "30px")
+						 		.attr("width", ((bodyWidth/2)-120)/scaleBlockNo+"px")
+						 		.attr("x", (((bodyWidth/2)-120)/scaleBlockNo)*i+"px")
+						 		.style("fill", getScaleColor(color, i, num, scaleBlockNo));
+						 	}
+
+/*
+						 	svg_scale.append("rect")
+						 		.attr("height", "30px")
+						 		.attr("width", ((bodyWidth/2)-20)/10+"px")
+						 		.attr("x", (((bodyWidth/2)-20)/10)*0+"px")
+						 		.style("fill", getScaleColor(color, 0, num));
+
+						 	svg_scale.append("rect")
+						 		.attr("height", "30px")
+						 		.attr("width", ((bodyWidth/2)-20)/10+"px")
+						 		.attr("x", (((bodyWidth/2)-20)/10)*1+"px")
+						 		.style("fill", getScaleColor(color, 1, num));
+
+						 	svg_scale.append("rect")
+						 		.attr("height", "30px")
+						 		.attr("width", ((bodyWidth/2)-20)/10+"px")
+						 		.attr("x", (((bodyWidth/2)-20)/10)*2+"px")
+						 		.style("fill", getScaleColor(color, 2, num));
+
+						 	svg_scale.append("rect")
+						 		.attr("height", "30px")
+						 		.attr("width", ((bodyWidth/2)-20)/10+"px")
+						 		.attr("x", (((bodyWidth/2)-20)/10)*3+"px")
+						 		.style("fill", getScaleColor(color, 3, num));
+
+						 	svg_scale.append("rect")
+						 		.attr("height", "30px")
+						 		.attr("width", ((bodyWidth/2)-20)/10+"px")
+						 		.attr("x", (((bodyWidth/2)-20)/10)*4+"px")
+						 		.style("fill", getScaleColor(color, 4, num));
+
+						 	svg_scale.append("rect")
+						 		.attr("height", "30px")
+						 		.attr("width", ((bodyWidth/2)-20)/10+"px")
+						 		.attr("x", (((bodyWidth/2)-20)/10)*5+"px")
+						 		.style("fill", getScaleColor(color, 5, num));
+
+						 	svg_scale.append("rect")
+						 		.attr("height", "30px")
+						 		.attr("width", ((bodyWidth/2)-20)/10+"px")
+						 		.attr("x", (((bodyWidth/2)-20)/10)*6+"px")
+						 		.style("fill", getScaleColor(color, 6, num));
+
+						 	svg_scale.append("rect")
+						 		.attr("height", "30px")
+						 		.attr("width", ((bodyWidth/2)-20)/10+"px")
+						 		.attr("x", (((bodyWidth/2)-20)/10)*7+"px")
+						 		.style("fill", getScaleColor(color, 7, num));
+
+						 	svg_scale.append("rect")
+						 		.attr("height", "30px")
+						 		.attr("width", ((bodyWidth/2)-20)/10+"px")
+						 		.attr("x", (((bodyWidth/2)-20)/10)*8+"px")
+						 		.style("fill", getScaleColor(color, 8, num));
+
+						 	svg_scale.append("rect")
+						 		.attr("height", "30px")
+						 		.attr("width", ((bodyWidth/2)-20)/10+"px")
+						 		.attr("x", (((bodyWidth/2)-20)/10)*9+"px")
+						 		.style("fill", getScaleColor(color, 9, num));
+*/
 			});
 	}
 
