@@ -160,7 +160,6 @@
 
 			d3.json("statgeo.json", function(uk){
 
-<<<<<<< HEAD
 				//Gets the coordinate data from our dataset.
 	            var subunits = topojson.feature(uk, uk.objects.thenewestdict1);
 
@@ -211,55 +210,6 @@
 				 			+ "Percent renting from landlord: " + d.properties.percentrent + "<br>"
 				 			+ "New homes built 2011/2012: " + d.properties.numnewhomes + "<br>" + 
 				 			"People per new home built: " + d3.round(d.properties.peoplepernewhome))});
-=======
-						//Gets the coordinate data from our dataset.
-			            var subunits = topojson.feature(uk, uk.objects.thenewestdict1);
-
-			            var random = function(d){
-			            		if (num == 0){
-			            			return color(d.properties.avghouseprice);	
-			            		};
-			            		if (num == 1){
-			            			return color(d.properties.population);
-			            		};
-			            		if (num == 2){
-			            			return color(d.properties.peoplepernewhome);
-			            		}};
-
-			            //Creates a projection which we can apply to the path.
-			            var projection = d3.geo.mercator()
-			                .center([-0.10,51.5171])
-			                .rotate([0,0])
-			                .scale(40000)
-			                .translate([width / 2, height / 2.3]);
-
-			            var path = d3.geo.path()
-			                .projection(projection);
-
-			            svg.append("g")
-			            	.attr("class", "boroughs")
-			            	.selectAll("path")
-			            	.data(topojson.feature(uk, uk.objects.thenewestdict1).features)
-			            	.enter().append("path")
-			            	.attr("d", path)
-			            	.attr("fill", "white")
-			            	.attr("stroke", "white")
-			            	.attr("id", function(d){return d.properties.Name})
-			            	.transition()
-				            	.duration(500)
-				            	.attr("fill", random)
-				            	.attr("stroke", "black")
-				            	.attr("stroke-width", "0.35");
-
-						 svg.selectAll("path")
-						 	.data(topojson.feature(uk, uk.objects.thenewestdict1).features)
-						 	.on("mouseover", function(d){
-						 		div.html("<b>" + d.properties.Name  + "</b><br>" 
-						 			+ "Population: " + d.properties.population + "<br>" +
-						 			"Average house price: £" + d.properties.avghouseprice + "<br>"
-						 			+ "Percent renting from landlord: " + d.properties.percentrent + "<br>"
-						 			+ "New homes built 2011/2012: " + d.properties.numnewhomes + "<br>" + 
-						 			"People per new home built: " + d3.round(d.properties.peoplepernewhome))});
     })
 	};
 
