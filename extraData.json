@@ -1,0 +1,136 @@
+{
+  "locations": [
+    {
+      "name": "City of London",
+      "happiness": ""
+    },
+    {
+      "name": "Barking and Dagenham",
+      "happiness": "7.57"
+    },
+    {
+      "name": "Barnet",
+      "happiness": "7.88"
+    },
+    {
+      "name": "Bexley",
+      "happiness": "7.72"
+    },
+    {
+      "name": "Brent",
+      "happiness": "7.63"
+    },
+    {
+      "name": "Bromley",
+      "happiness": "7.81"
+    },
+    {
+      "name": "Camden",
+      "happiness": "7.50"
+    },
+    {
+      "name": "Croydon",
+      "happiness": "7.77"
+    },
+    {
+      "name": "Ealing",
+      "happiness": "7.40"
+    },
+    {
+      "name": "Enfield",
+      "happiness": "7.77"
+    },
+    {
+      "name": "Greenwich",
+      "happiness": "7.53"
+    },
+    {
+      "name": "Hackney",
+      "happiness": "7.81"
+    },
+    {
+      "name": "Hammersmith and Fulham",
+      "happiness": "7.52"
+    },
+    {
+      "name": "Haringey",
+      "happiness": "7.32"
+    },
+    {
+      "name": "Harrow",
+      "happiness": "7.75"
+    },
+    {
+      "name": "Havering",
+      "happiness": "7.55"
+    },
+    {
+      "name": "Hillingdon",
+      "happiness": "7.53"
+    },
+    {
+      "name": "Hounslow",
+      "happiness": "7.61"
+    },
+    {
+      "name": "Islington",
+      "happiness": "7.54"
+    },
+    {
+      "name": "Kensington and Chelsea",
+      "happiness": "7.66"
+    },
+    {
+      "name": "Kingston upon Thames",
+      "happiness": "7.78"
+    },
+    {
+      "name": "Lambeth",
+      "happiness": "7.60"
+    },
+    {
+      "name": "Lewisham",
+      "happiness": "7.66"
+    },
+    {
+      "name": "Merton",
+      "happiness": "7.93"
+    },
+    {
+      "name": "Newham",
+      "happiness": "7.76"
+    },
+    {
+      "name": "Redbridge",
+      "happiness": "7.80"
+    },
+    {
+      "name": "Richmond upon Thames",
+      "happiness": "7.93"
+    },
+    {
+      "name": "Southwark",
+      "happiness": "7.70"
+    },
+    {
+      "name": "Sutton",
+      "happiness": "7.90"
+    },
+    {
+      "name": "Tower Hamlets",
+      "happiness": "7.73"
+    },
+    {
+      "name": "Waltham Forest",
+      "happiness": "7.62"
+    },
+    {
+      "name": "Wandsworth",
+      "happiness": "7.73"
+    },
+    {
+      "name": "Westminster",
+      "happiness": "7.45"
+    }
+  ]
+}
