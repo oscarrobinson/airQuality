@@ -44,7 +44,7 @@
 			}
 
 			.liquid-slider{
-				height:60px;
+				height:35px;
 				width:100%;
 			}
 
@@ -61,16 +61,16 @@
 			<div id="data-switch">
 				<div class="liquid-slider" id="data-select">
 					<div id="happiness" class="selection">
-						Happiness
+						<p class="title">Happiness</p>
 					</div>
 					<div id="trees"  class="selection">
-						Trees
+						<p class="title">Trees</p>
 					</div>
 					<div id="toilets" class="selection">
-						Toilets
+						<p class="title">Toilets</p>
 					</div>
 					<div id="volunteering" class="selection">
-						Volunteering
+						<p class="title">Volunteering</p>
 					</div>
 				</div>
 			</div>
@@ -87,6 +87,8 @@
 		     	slideEaseDuration: 100,
 		     	dynamicTabs:true,
 		     	includeTitle: true,
+		     	autoHeight: false,
+		    	mobileUIThreshold: 1025,
 		     	callback: function(){
 		     		
 		     	}
