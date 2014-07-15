@@ -270,7 +270,7 @@
 		
 
 
-
+		var noDataColor = "#F9CCCA";
 
 
  		
@@ -313,16 +313,16 @@
 
 			            var random = function(d){
 			            		if (num == 0){
-			            			return (d.properties.happiness == "") ? "rgba(255, 0, 0, 0.5)" : color(d.properties.happiness);	
+			            			return (d.properties.happiness == "") ? noDataColor : color(d.properties.happiness);	
 			            		}
 			            		if (num == 1){
-			            			return (d.properties.trees == "") ? "rgba(255, 0, 0, 0.5)" : color(d.properties.trees);
+			            			return (d.properties.trees == "") ? noDataColor : color(d.properties.trees);
 			            		}
 			            		if (num == 2){
-			            			return (d.properties.toilets == "") ? "rgba(255, 0, 0, 0.5)" : color(d.properties.toilets);	
+			            			return (d.properties.toilets == "") ? noDataColor : color(d.properties.toilets);	
 			            		}
 			            		if (num == 3){
-			            			return (d.properties.volunteering == "") ? "rgba(255, 0, 0, 0.5)" : color(d.properties.volunteering);
+			            			return (d.properties.volunteering == "") ? noDataColor : color(d.properties.volunteering);
 			            		}
 			            }
 
@@ -411,7 +411,8 @@
 						 		.attr("width", "25px")
 						 		.attr("x",120+"px")
 						 		.attr("y", "40px")
-						 		.style("fill", "#fe7f7f");
+						 		.style("fill", noDataColor)
+						 		.style("stroke", "black");
 
 
 
