@@ -32,7 +32,7 @@
 			}
 
 			#viz{
-				width:700px;
+				width:650px;
 				height:100%;
 				min-height:600px;
 				float:right;
@@ -62,9 +62,9 @@
 
 			div.tooltip {         
 			  text-align: left;           
-			  width: 200px;                  
-			  height: 400px;                 
-			  padding: 5px;
+			  width: 250px;                  
+			  height: 120px;                 
+			  padding: 10px;
 			  color:white;             
 			  font: 18px sans-serif;     
 			  background: gray;   
@@ -72,7 +72,7 @@
 			  border-radius: 8px;           
 			  pointer-events: none;  
 			  float:left;
-			  margin-left:50px;
+			  margin-left:30px;
 			  margin-top: 60px;      
 			}
 
@@ -81,10 +81,15 @@
 				height:100px;
 				float:right;
 				margin-top:-100px;
+				background-color:#dddddd;
 			}
 			#scale svg {
 				padding:60px;
 				padding-top:20px;
+			}
+			.head-body{
+				padding-left:20px;
+				font-size: 10pt;
 			}
 
 		</style>
@@ -97,15 +102,19 @@
 				<div class="liquid-slider" id="data-select">
 					<div id="happiness" class="selection">
 						<p class="title">Happiness</p>
+						<div class="head-body">Rating of happiness reported by residents of each borough on a scale of 0 to 10.  Average of reported values from 2009-2013.</div>
 					</div>
 					<div id="trees"  class="selection">
 						<p class="title">Trees</p>
+						<div class="head-body">Number of street trees in each borough in 2011.</div>
 					</div>
 					<div id="toilets" class="selection">
 						<p class="title">Toilets</p>
+						<div class="head-body">Number of public toilets in each borough.</div>
 					</div>
 					<div id="volunteering" class="selection">
 						<p class="title">Volunteering</p>
+						<div class="head-body">Percentage of residents in each borough who were involved in volunteering work in the last 12 months in 2010/11 to 2012/13.</div>
 					</div>
 				</div>
 			</div>
@@ -154,8 +163,7 @@
 
 		}
 
-
-		function getScaleColor(color, inc, num, scaleBlockNo){
+		function getScaleMinMax(num){
 			var max = 0;
 			var min = 0;
 			if(num==0){
@@ -174,6 +182,41 @@
 				min = 0;
 				max = 50;
 			}
+			return [min,max];
+
+		}
+
+		function getScaleText(num){
+			var minmax = getScaleMinMax(num);
+			var min = minmax[0];
+			var max = minmax[1];
+			var sMinText = "";
+			var sMaxText = "";
+			if(num==0){
+				sMaxText = max+"/10";
+				sMinText = min+"/10";
+			}
+			else if(num==1){
+				sMaxText = max;
+				sMinText = min;
+			}
+			else if(num==2){
+				sMaxText = max;
+				sMinText = min;
+			}
+			else if(num==3){
+				sMaxText = max+"%";
+				sMinText = min+"%";
+			}
+			return [sMinText, sMaxText];
+
+		}
+
+
+		function getScaleColor(color, inc, num, scaleBlockNo){
+			var minmax = getScaleMinMax(num);
+			var min = minmax[0];
+			var max = minmax[1];
 			console.log(inc+": "+min+" "+max);
 			console.log(inc+": "+(min+((max/10)*inc)));
 			return color(min+(((max-min)/scaleBlockNo)*inc));
@@ -315,6 +358,44 @@
 						 		.attr("x", (((bodyWidth/2)-120)/scaleBlockNo)*i+"px")
 						 		.style("fill", getScaleColor(color, i, num, scaleBlockNo));
 						 	}
+
+						 	svg_scale.append("rect")
+						 		.attr("height", "50px")
+						 		.attr("width", "2px")
+						 		.attr("x", "-2px");
+
+						 	svg_scale.append("rect")
+						 		.attr("height", "50px")
+						 		.attr("width", "2px")
+						 		.attr("x", (((bodyWidth/2)-120)/scaleBlockNo)*i+"px");
+
+						 	svg_scale.append("rect")
+						 		.attr("height", "25px")
+						 		.attr("width", "25px")
+						 		.attr("x",120+"px")
+						 		.attr("y", "40px")
+						 		.style("fill", "#fe7f7f");
+
+
+
+						 	svg_scale.selectAll("text").remove();
+
+						 	svg_scale.append("text")
+						 		.text(getScaleText(num)[0])
+						 		.attr("y", "65px")
+						 		.attr("x", "-2px")
+						 		.attr("dx", "-0.7em");
+
+						 	svg_scale.append("text")
+						 		.text(getScaleText(num)[1])
+						 		.attr("y", "65px")
+						 		.attr("dx", "-0.7em")
+						 		.attr("x", (((bodyWidth/2)-120)/scaleBlockNo)*i+"px");
+
+						 	svg_scale.append("text")
+						 		.text("= data not available")
+						 		.attr("y", "57px")
+						 		.attr("x", "150px");
 
 /*
 						 	svg_scale.append("rect")

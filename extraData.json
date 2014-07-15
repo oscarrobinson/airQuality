@@ -1,231 +1,231 @@
 {
   "locations": [
     {
-      "name": "Barking and Dagenham",
+      "Name": "Barking and Dagenham",
       "happiness": "7.57",
       "toilets": "10",
       "trees": "4500",
       "volunteering": "21"
     },
     {
-      "name": "Barnet",
+      "Name": "Barnet",
       "happiness": "7.88",
       "toilets": "",
       "trees": "36000",
       "volunteering": "33"
     },
     {
-      "name": "Bexley",
+      "Name": "Bexley",
       "happiness": "7.72",
       "toilets": "16",
       "trees": "11000",
       "volunteering": "22"
     },
     {
-      "name": "Brent",
+      "Name": "Brent",
       "happiness": "7.63",
       "toilets": "32",
       "trees": "18000",
       "volunteering": "17"
     },
     {
-      "name": "Bromley",
+      "Name": "Bromley",
       "happiness": "7.81",
       "toilets": "29",
       "trees": "38000",
       "volunteering": "29"
     },
     {
-      "name": "Camden",
+      "Name": "Camden",
       "happiness": "7.50",
       "toilets": "35",
       "trees": "10000",
       "volunteering": "22"
     },
     {
-      "name": "City of London",
+      "Name": "City of London",
       "happiness": "",
       "toilets": "50",
       "trees": "1653",
       "volunteering": ""
     },
     {
-      "name": "Croydon",
+      "Name": "Croydon",
       "happiness": "7.77",
       "toilets": "20",
       "trees": "33000",
       "volunteering": "27"
     },
     {
-      "name": "Ealing",
+      "Name": "Ealing",
       "happiness": "7.40",
       "toilets": "19",
       "trees": "26500",
       "volunteering": "32"
     },
     {
-      "name": "Enfield",
+      "Name": "Enfield",
       "happiness": "7.77",
       "toilets": "53",
       "trees": "20000",
       "volunteering": "22"
     },
     {
-      "name": "Greenwich",
+      "Name": "Greenwich",
       "happiness": "7.53",
       "toilets": "24",
       "trees": "12000",
       "volunteering": "17"
     },
     {
-      "name": "Hackney",
+      "Name": "Hackney",
       "happiness": "7.81",
       "toilets": "13",
       "trees": "7000",
       "volunteering": "30"
     },
     {
-      "name": "Hammersmith and Fulham",
+      "Name": "Hammersmith and Fulham",
       "happiness": "7.52",
       "toilets": "16",
       "trees": "8695",
       "volunteering": "30"
     },
     {
-      "name": "Haringey",
+      "Name": "Haringey",
       "happiness": "7.32",
       "toilets": "17",
       "trees": "10000",
       "volunteering": "30"
     },
     {
-      "name": "Harrow",
+      "Name": "Harrow",
       "happiness": "7.75",
       "toilets": "10",
       "trees": "18000",
       "volunteering": "39"
     },
     {
-      "name": "Havering",
+      "Name": "Havering",
       "happiness": "7.55",
       "toilets": "8",
       "trees": "23500",
       "volunteering": "17"
     },
     {
-      "name": "Hillingdon",
+      "Name": "Hillingdon",
       "happiness": "7.53",
       "toilets": "31",
       "trees": "16000",
       "volunteering": "24"
     },
     {
-      "name": "Hounslow",
+      "Name": "Hounslow",
       "happiness": "7.61",
       "toilets": "",
       "trees": "11275",
       "volunteering": "27"
     },
     {
-      "name": "Islington",
+      "Name": "Islington",
       "happiness": "7.54",
       "toilets": "16",
       "trees": "10790",
       "volunteering": "31"
     },
     {
-      "name": "Kensington and Chelsea",
+      "Name": "Kensington and Chelsea",
       "happiness": "7.66",
       "toilets": "12",
       "trees": "7880",
       "volunteering": "31"
     },
     {
-      "name": "Kingston upon Thames",
+      "Name": "Kingston upon Thames",
       "happiness": "7.78",
       "toilets": "34",
       "trees": "10000",
       "volunteering": "43"
     },
     {
-      "name": "Lambeth",
+      "Name": "Lambeth",
       "happiness": "7.60",
       "toilets": "42",
       "trees": "9371",
       "volunteering": "32"
     },
     {
-      "name": "Lewisham",
+      "Name": "Lewisham",
       "happiness": "7.66",
       "toilets": "21",
       "trees": "12000",
       "volunteering": "28"
     },
     {
-      "name": "Merton",
+      "Name": "Merton",
       "happiness": "7.93",
       "toilets": "2",
       "trees": "14000",
       "volunteering": "22"
     },
     {
-      "name": "Newham",
+      "Name": "Newham",
       "happiness": "7.76",
       "toilets": "10",
       "trees": "16200",
       "volunteering": "8"
     },
     {
-      "name": "Redbridge",
+      "Name": "Redbridge",
       "happiness": "7.80",
       "toilets": "16",
       "trees": "20872",
       "volunteering": "25"
     },
     {
-      "name": "Richmond upon Thames",
+      "Name": "Richmond upon Thames",
       "happiness": "7.93",
       "toilets": "97",
       "trees": "16000",
       "volunteering": "49"
     },
     {
-      "name": "Southwark",
+      "Name": "Southwark",
       "happiness": "7.70",
       "toilets": "33",
       "trees": "15436",
       "volunteering": "26"
     },
     {
-      "name": "Sutton",
+      "Name": "Sutton",
       "happiness": "7.90",
       "toilets": "14",
       "trees": "22000",
       "volunteering": "24"
     },
     {
-      "name": "Tower Hamlets",
+      "Name": "Tower Hamlets",
       "happiness": "7.73",
       "toilets": "16",
       "trees": "4253",
       "volunteering": "21"
     },
     {
-      "name": "Waltham Forest",
+      "Name": "Waltham Forest",
       "happiness": "7.62",
       "toilets": "39",
       "trees": "22000",
       "volunteering": "19"
     },
     {
-      "name": "Wandsworth",
+      "Name": "Wandsworth",
       "happiness": "7.73",
       "toilets": "87",
       "trees": "14500",
       "volunteering": "35"
     },
     {
-      "name": "Westminster",
+      "Name": "Westminster",
       "happiness": "7.45",
       "toilets": "25",
       "trees": "8400",
