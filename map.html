@@ -25,16 +25,14 @@
 
 
 		<style>
-
-	
 			path:hover{
 				fill-opacity: 0.5;
 			}
 
 			#viz{
 				width:650px;
-				height:100%;
-				min-height:600px;
+				height:550px;
+				min-height:550px;
 				float:right;
 			}
 
@@ -92,6 +90,22 @@
 				font-size: 10pt;
 			}
 
+			#credits{
+				/*background: gray;*/
+				border:0px;
+				border-radius:8px;
+				width:100%;
+				margin-left: 30px;
+				padding:10px;
+
+
+			}
+
+			.row-clearfix{
+				clear:both;
+				min-height:550px;
+			}
+
 		</style>
 
 
@@ -102,19 +116,19 @@
 				<div class="liquid-slider" id="data-select">
 					<div id="happiness" class="selection">
 						<p class="title">Happiness</p>
-						<div class="head-body">Rating of happiness reported by residents of each borough on a scale of 0 to 10.  Average of reported values from 2009-2013.</div>
+						<div class="head-body">Rating of happiness reported by residents of each borough on a scale of 0 to 10.  Average of reported values from 2009-2013. <a href="http://data.london.gov.uk/datastore/package/london-happiness-scores-borough">Source</a></div>
 					</div>
 					<div id="trees"  class="selection">
 						<p class="title">Trees</p>
-						<div class="head-body">Number of street trees in each borough in 2011.</div>
+						<div class="head-body">Number of street trees in each borough in 2011. <a href="http://data.london.gov.uk/datastore/package/street-trees-borough">Source</a></div>
 					</div>
 					<div id="toilets" class="selection">
 						<p class="title">Toilets</p>
-						<div class="head-body">Number of public toilets in each borough.</div>
+						<div class="head-body">Number of public toilets in each borough. <a href="http://data.london.gov.uk/datastore/package/public-toilets">Source</a></div>
 					</div>
 					<div id="volunteering" class="selection">
 						<p class="title">Volunteering</p>
-						<div class="head-body">Percentage of residents in each borough who were involved in volunteering work in the last 12 months in 2010/11 to 2012/13.</div>
+						<div class="head-body">Percentage of residents in each borough who were involved in volunteering work in the last 12 months in 2010/11 to 2012/13. <a href="http://data.london.gov.uk/datastore/package/volunteering-work-among-adults-borough">Source</a></div>
 					</div>
 				</div>
 			</div>
@@ -122,8 +136,13 @@
 			</div>
 		</div>
 		<div class="row-fluid">
-		<div id="stats"></div>
-		<div id="viz"></div>
+		<div class="row-clearfix">
+			<div id="stats"></div>
+			<div id="viz"></div>
+		</div>
+		<div id="credits">
+			<p><a href="https://github.com/sjwhitworth/londonhousingmarket">London in D3</a>  created by <a href="http://www.sjwhitworth.com">Stephen Whitworth</a>.  Adapted by Oscar Robinson and Jonny Manfield, UCL.</p>
+		</div>
 	<script>
 
 		$(function(){
