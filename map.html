@@ -269,7 +269,6 @@
 		var svg_scale = d3.select('#scale').append("svg").attr("width", (bodyWidth/2)-120).attr("height", 80)
 		
 
-		var paths = d3.selectAll("path");
 
 
 
@@ -381,6 +380,9 @@
 						 			"Number Of Toilets: " + toilets+ "<br>"
 						 			+ "Trees: " + trees + "<br>"
 						 			+ "Volunteering: " + volunteering+ "% <br>");
+
+						 		var sel = d3.select(this);
+  								sel.moveToFront();
 						 	});
 
 
@@ -430,15 +432,7 @@
 						 	svg_scale.append("text")
 						 		.text("= data not available")
 						 		.attr("y", "57px")
-						 		.attr("x", "150px");
-
-
-						 	paths = d3.selectAll("path");
-
-						 	paths.on("mouseover",function(){
-  								var sel = d3.select(this);
-  								sel.moveToFront();
-							});			
+						 		.attr("x", "150px");	
 
 /*
 						 	svg_scale.append("rect")
